@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="text_digicerto">DIGIcerto</string>
+
+    <string name="msg_update_registers">Atualizando cadastros</string>
 </resources>
