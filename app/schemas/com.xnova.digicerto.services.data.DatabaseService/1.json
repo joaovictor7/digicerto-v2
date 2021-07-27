@@ -1,0 +1,532 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f2c710a53398766c8953ea5efef7a6ad",
+    "entities": [
+      {
+        "tableName": "Driver",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `Name` TEXT NOT NULL, `Active` INTEGER NOT NULL, PRIMARY KEY(`Code`))",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "Code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "Name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "Active",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Code"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Occurrence",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `Active` INTEGER NOT NULL, `Type` TEXT NOT NULL, `Description` TEXT NOT NULL, PRIMARY KEY(`Code`))",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "Code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "Active",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "Type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "Description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Code"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Producer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `FarmCode` INTEGER NOT NULL, `Active` INTEGER NOT NULL, `Name` TEXT, `FarmName` TEXT, `AvgVolume` REAL, `TankType` TEXT NOT NULL, `TankCode` INTEGER, `Note` TEXT, PRIMARY KEY(`Code`, `FarmCode`))",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "Code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "farmCode",
+            "columnName": "FarmCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "Active",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "Name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "farmName",
+            "columnName": "FarmName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgVolume",
+            "columnName": "AvgVolume",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tankType",
+            "columnName": "TankType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tankCode",
+            "columnName": "TankCode",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "Note",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Code",
+            "FarmCode"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "RouteProducer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`RouteCode` INTEGER NOT NULL, `ProducerCode` INTEGER NOT NULL, `ProducerFarmCode` INTEGER NOT NULL, `Sequence` INTEGER NOT NULL, PRIMARY KEY(`RouteCode`, `ProducerCode`, `ProducerFarmCode`))",
+        "fields": [
+          {
+            "fieldPath": "routeCode",
+            "columnName": "RouteCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "producerCode",
+            "columnName": "ProducerCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "producerFarmCode",
+            "columnName": "ProducerFarmCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "Sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "RouteCode",
+            "ProducerCode",
+            "ProducerFarmCode"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Route",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `Active` INTEGER NOT NULL, `Name` TEXT NOT NULL, PRIMARY KEY(`Code`))",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "Code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "Active",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "Name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Code"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Vehicle",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `Plate` TEXT NOT NULL, `Active` INTEGER NOT NULL, PRIMARY KEY(`Code`))",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "Code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plate",
+            "columnName": "Plate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "Active",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Code"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "VehicleCompartment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`VehicleCode` INTEGER NOT NULL, `Compartment` INTEGER NOT NULL, `Capacity` INTEGER NOT NULL, PRIMARY KEY(`VehicleCode`, `Compartment`))",
+        "fields": [
+          {
+            "fieldPath": "vehicleCode",
+            "columnName": "VehicleCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "compartment",
+            "columnName": "Compartment",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "capacity",
+            "columnName": "Capacity",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "VehicleCode",
+            "Compartment"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Settings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperationType` TEXT, `LatestSync` TEXT, `Travel_Type` TEXT NOT NULL, `Travel_ReadBarcode` INTEGER NOT NULL, `Travel_WildcardProducer` INTEGER NOT NULL, `Travel_Transhipment` INTEGER NOT NULL, `Travel_CollectiveTankProduction` TEXT NOT NULL, `Travel_ReadSample` TEXT NOT NULL, `Travel_AcidMilk` INTEGER NOT NULL, `Travel_TypeTravelCodeReading` TEXT NOT NULL, `Travel_PlatformMeasure` TEXT NOT NULL, `Travel_MilkDensityType` TEXT NOT NULL, `Travel_AwaitDischarge` INTEGER NOT NULL, `Travel_TemperaturePicture` INTEGER NOT NULL, `Travel_Odometer` INTEGER NOT NULL, `Travel_ProductionTolerancePercentage` REAL, `Travel_Email` TEXT, `FTP_Host` TEXT, `FTP_Port` INTEGER, `FTP_Username` TEXT, `FTP_Password` TEXT, `FTP_Folder` TEXT, `WS_Host` TEXT, `WS_Port` INTEGER, `WS_Username` TEXT, `WS_Password` TEXT, `Printer_UsePrinter` INTEGER NOT NULL, `Printer_SecondVia` TEXT NOT NULL, `Printer_CancelledCollections` INTEGER NOT NULL, `Printer_PrintType` TEXT NOT NULL, `Printer_Printer` TEXT, `Printer_PrintScale` INTEGER NOT NULL, `Printer_PrintCompartments` INTEGER NOT NULL, `Printer_PrintSample` INTEGER NOT NULL, `Printer_PrintTemperature` INTEGER NOT NULL, `Printer_PrintOccurrence` INTEGER NOT NULL, `Printer_PrintAlizarol` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "Id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operationType",
+            "columnName": "OperationType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latestSync",
+            "columnName": "LatestSync",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "travelSettings.type",
+            "columnName": "Travel_Type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.readBarcode",
+            "columnName": "Travel_ReadBarcode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.wildcardProducer",
+            "columnName": "Travel_WildcardProducer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.transhipment",
+            "columnName": "Travel_Transhipment",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.collectiveTankProduction",
+            "columnName": "Travel_CollectiveTankProduction",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.readSample",
+            "columnName": "Travel_ReadSample",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.acidMilk",
+            "columnName": "Travel_AcidMilk",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.typeTravelCodeReading",
+            "columnName": "Travel_TypeTravelCodeReading",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.platformMeasure",
+            "columnName": "Travel_PlatformMeasure",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.milkDensityType",
+            "columnName": "Travel_MilkDensityType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.awaitDischarge",
+            "columnName": "Travel_AwaitDischarge",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.temperaturePicture",
+            "columnName": "Travel_TemperaturePicture",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.odometer",
+            "columnName": "Travel_Odometer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travelSettings.productionTolerancePercentage",
+            "columnName": "Travel_ProductionTolerancePercentage",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "travelSettings.email",
+            "columnName": "Travel_Email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ftpSettings.host",
+            "columnName": "FTP_Host",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ftpSettings.port",
+            "columnName": "FTP_Port",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ftpSettings.username",
+            "columnName": "FTP_Username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ftpSettings.password",
+            "columnName": "FTP_Password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ftpSettings.folder",
+            "columnName": "FTP_Folder",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wsSettings.host",
+            "columnName": "WS_Host",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wsSettings.port",
+            "columnName": "WS_Port",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wsSettings.username",
+            "columnName": "WS_Username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wsSettings.password",
+            "columnName": "WS_Password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "printerSettings.usePrinter",
+            "columnName": "Printer_UsePrinter",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.secondVia",
+            "columnName": "Printer_SecondVia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.canceledCollections",
+            "columnName": "Printer_CancelledCollections",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.printType",
+            "columnName": "Printer_PrintType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.printer",
+            "columnName": "Printer_Printer",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "printerSettings.data.printScale",
+            "columnName": "Printer_PrintScale",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.data.printCompartments",
+            "columnName": "Printer_PrintCompartments",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.data.printSample",
+            "columnName": "Printer_PrintSample",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.data.printTemperature",
+            "columnName": "Printer_PrintTemperature",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.data.printOccurrence",
+            "columnName": "Printer_PrintOccurrence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerSettings.data.printAlizarol",
+            "columnName": "Printer_PrintAlizarol",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f2c710a53398766c8953ea5efef7a6ad')"
+    ]
+  }
+}

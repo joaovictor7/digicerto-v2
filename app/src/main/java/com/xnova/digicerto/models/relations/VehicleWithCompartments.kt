@@ -1,8 +1,8 @@
-package com.xnova.digicerto.models.entities.relations
+package com.xnova.digicerto.models.relations
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.xnova.digicerto.models.VehicleCompartments
+import com.xnova.digicerto.models.VehicleCompartment
 import com.xnova.digicerto.models.Vehicle
 
 data class VehicleWithCompartments(
@@ -11,5 +11,5 @@ data class VehicleWithCompartments(
         parentColumn = "Code",
         entityColumn = "VehicleCode"
     )
-    val compartments: List<VehicleCompartments>
+    val compartments: List<VehicleCompartment>
 )

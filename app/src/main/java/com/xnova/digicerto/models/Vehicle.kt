@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class Vehicle(
     @PrimaryKey @ColumnInfo(name = "Code") val code: Int,
     @ColumnInfo(name = "Plate") val plate: String,
-    @ColumnInfo(name = "Active") val active: Boolean
+    @ColumnInfo(name = "Active") val active: Boolean = true
 )

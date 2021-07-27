@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Driver")
 data class Driver(
     @PrimaryKey @ColumnInfo(name = "Code") val code: Int,
-    @ColumnInfo(name = "Plate") val plate: String,
-    @ColumnInfo(name = "Active") val active: Boolean
+    @ColumnInfo(name = "Name") val name: String,
+    @ColumnInfo(name = "Active") val active: Boolean = true
 )

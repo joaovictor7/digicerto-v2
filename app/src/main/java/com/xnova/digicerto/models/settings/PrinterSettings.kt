@@ -10,6 +10,6 @@ data class PrinterSettings(
     @ColumnInfo(name = "SecondVia") val secondVia: SecondVia,
     @ColumnInfo(name = "CancelledCollections") val canceledCollections: Boolean,
     @ColumnInfo(name = "PrintType") val printType: PrintType,
-    @ColumnInfo(name = "Printer") val printer: String,
+    @ColumnInfo(name = "Printer") val printer: String?,
     @Embedded val data: PrinterDataSettings
 )

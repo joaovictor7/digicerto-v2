@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Route")
 data class Route(
     @PrimaryKey @ColumnInfo(name = "Code") val code: Int,
-    @ColumnInfo(name = "Active") val active: Boolean,
+    @ColumnInfo(name = "Active") val active: Boolean = true,
     @ColumnInfo(name = "Name") val name: String
 )

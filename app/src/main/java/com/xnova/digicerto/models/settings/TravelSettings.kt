@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import com.xnova.digicerto.services.enums.*
 
 data class TravelSettings(
-    @ColumnInfo(name = "Type") val type: RouteType,
+    @ColumnInfo(name = "Type") val type: TravelType,
     @ColumnInfo(name = "ReadBarcode") val readBarcode: Boolean,
     @ColumnInfo(name = "WildcardProducer") val wildcardProducer: Boolean,
     @ColumnInfo(name = "Transhipment") val transhipment: Boolean,
