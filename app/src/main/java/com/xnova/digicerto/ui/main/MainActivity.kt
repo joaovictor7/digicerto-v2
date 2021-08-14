@@ -1,6 +1,7 @@
 package com.xnova.digicerto.ui.main
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,7 +10,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityMainBinding
 
@@ -18,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAppBarConfiguration: AppBarConfiguration
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mViewModel: MainViewModel
+    private lateinit var mView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        mView = mBinding.root
+        setContentView(mView)
 
         setSupportActionBar(mBinding.appBarMain.toolbar)
 
@@ -45,6 +52,19 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(mAppBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    /*fun openCloseNavigationDrawer(view: View) {
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            mBinding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }*/
+
+    fun changeFragment(fragment: Int){
+        findNavController(R.id.nav_host_fragment_content_main)
+            .navigate(fragment)
     }
 
     private fun setNavigationMenu() {

@@ -10,6 +10,7 @@ data class Settings(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "Id") val id: Int,
     @ColumnInfo(name = "OperationType") var operationType: OperationType?,
     @ColumnInfo(name = "LatestSync") var latestSync: Calendar?,
+    @Embedded(prefix = "Authentication_") var authentication: AuthenticationSettings?,
     @Embedded(prefix = "Travel_") val travelSettings: TravelSettings,
     @Embedded(prefix = "FTP_") var ftpSettings: FTPSettings?,
     @Embedded(prefix = "WS_") val wsSettings: WSSettings?,
@@ -21,4 +22,12 @@ data class Settings(
     val ftpOperationAvailable: Boolean = ftpSettings != null
     @Ignore
     val wsOperationAvailable: Boolean = wsSettings != null
+    @Ignore
+    val authenticationAvailable: Boolean = authentication != null
+    @Ignore
+    val necessaryChooseTypeOperation: Boolean = operationType == null
+
+    fun updateLatestSync() {
+        latestSync = Calendar.getInstance()
+    }
 }

@@ -5,7 +5,7 @@ import com.xnova.digicerto.models.RouteProducer
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.util.NumberUtil
 
-class RouteProducerBuilder(context: Context) : Build(context, "ROTA") {
+class RouteProducerBuilder(context: Context) : Builder(context, RouteBuilder.REGISTER_TYPE) {
 
     override fun validate(line: List<String>): Boolean {
         return line.count() >= SyncConstants.FTP.KEYS.ROUTE.MINIMUM_DATA_WITH_PRODUCER &&

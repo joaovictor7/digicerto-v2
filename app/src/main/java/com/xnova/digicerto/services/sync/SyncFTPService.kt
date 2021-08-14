@@ -4,9 +4,7 @@ import android.content.Context
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.repositories.remote.FTPRepository
 import com.xnova.digicerto.services.sync.builders.*
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.File
 import java.util.*
 
@@ -16,7 +14,7 @@ class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
     private val mFTPRepository = FTPRepository(mContext, mFTPSettings.host!!, mFTPSettings.port!!)
 
     override fun necessarySync(): Observable<Boolean> {
-        return mFTPRepository.connect(mFTPSettings.username!!, mFTPSettings.password!!)
+        return mFTPRepository.connect(mFTPSettings.username!!, mFTPSettings.getPasswordDecrypted())
             .flatMap { mFTPRepository.fileModificationDate(mFTPSettings.folder!! + SyncConstants.FTP.FILE_NAME) }
             .flatMap {
                 mFTPRepository.dispose()
@@ -25,7 +23,7 @@ class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
     }
 
     override fun retrieveData(): Observable<Boolean> {
-        return mFTPRepository.connect(mFTPSettings.username!!, mFTPSettings.password!!)
+        return mFTPRepository.connect(mFTPSettings.username!!, mFTPSettings.getPasswordDecrypted())
             .flatMap {
                 mFTPRepository.downloadFile(mFTPSettings.folder!!, SyncConstants.FTP.FILE_NAME)
             }
@@ -107,7 +105,7 @@ class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
 
     private fun necessarySync(lastModified: Calendar): Observable<Boolean> {
         return Observable.create {
-            if (mSettings.latestSync != null && mSettings.latestSync!! < lastModified) {
+            if (mSettings.latestSync == null || mSettings.latestSync!! < lastModified) {
                 it.onNext(true)
             }
 
@@ -116,28 +114,28 @@ class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
     }
 
     private fun lineValidateAndEntitieBuilder(line: List<String>) {
-        var builder: Build
+        var builder: Builder
 
         when (line[SyncConstants.FTP.KEYS.RECORD_TYPE]) {
-            "PRODUTOR" -> {
+            ProducerBuilder.REGISTER_TYPE -> {
                 builder = ProducerBuilder(mContext)
                 if (builder.validate(line)) {
                     mProducers.add(builder.build(line))
                 }
             }
-            "VEICULO" -> {
+            VehicleBuilder.REGISTER_TYPE -> {
                 builder = VehicleBuilder(mContext)
                 if (builder.validate(line)) {
                     mVehiclesWithCompartments.add(builder.build(line))
                 }
             }
-            "TRANSPORTADOR" -> {
+            DriverBuilder.REGISTER_TYPE -> {
                 builder = DriverBuilder(mContext)
                 if (builder.validate(line)) {
                     mDrivers.add(builder.build(line))
                 }
             }
-            "ROTA" -> {
+            RouteBuilder.REGISTER_TYPE -> {
                 builder = RouteBuilder(mContext)
                 if (builder.validate(line)) {
                     mRoutes.add(builder.build(line))
@@ -148,7 +146,7 @@ class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
                     mRouteProducers.add(builder.build(line))
                 }
             }
-            "OCORRENCIA" -> {
+            OccurrenceBuilder.REGISTER_TYPE -> {
                 builder = OccurrenceBuilder(mContext)
                 if (builder.validate(line)) {
                     mOccurrences.add(builder.build(line))

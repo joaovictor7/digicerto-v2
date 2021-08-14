@@ -3,7 +3,6 @@ package com.xnova.digicerto.services.repositories.local
 import android.content.Context
 import com.xnova.digicerto.models.settings.Settings
 import com.xnova.digicerto.services.data.DatabaseService
-import java.util.*
 
 class SettingsRepository(context: Context) {
 
@@ -13,9 +12,7 @@ class SettingsRepository(context: Context) {
         return mSettingsDao.get()
     }
 
-    fun updateLatestSync() {
-        val s = get()
-        s.latestSync = Calendar.getInstance()
-        mSettingsDao.update(s)
+    fun update(settings: Settings) {
+        mSettingsDao.update(settings)
     }
 }

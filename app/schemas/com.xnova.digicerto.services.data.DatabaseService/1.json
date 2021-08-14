@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f2c710a53398766c8953ea5efef7a6ad",
+    "identityHash": "b51266041f3ced38e94d57ad88b48ebd",
     "entities": [
       {
         "tableName": "Driver",
@@ -282,7 +282,7 @@
       },
       {
         "tableName": "Settings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperationType` TEXT, `LatestSync` TEXT, `Travel_Type` TEXT NOT NULL, `Travel_ReadBarcode` INTEGER NOT NULL, `Travel_WildcardProducer` INTEGER NOT NULL, `Travel_Transhipment` INTEGER NOT NULL, `Travel_CollectiveTankProduction` TEXT NOT NULL, `Travel_ReadSample` TEXT NOT NULL, `Travel_AcidMilk` INTEGER NOT NULL, `Travel_TypeTravelCodeReading` TEXT NOT NULL, `Travel_PlatformMeasure` TEXT NOT NULL, `Travel_MilkDensityType` TEXT NOT NULL, `Travel_AwaitDischarge` INTEGER NOT NULL, `Travel_TemperaturePicture` INTEGER NOT NULL, `Travel_Odometer` INTEGER NOT NULL, `Travel_ProductionTolerancePercentage` REAL, `Travel_Email` TEXT, `FTP_Host` TEXT, `FTP_Port` INTEGER, `FTP_Username` TEXT, `FTP_Password` TEXT, `FTP_Folder` TEXT, `WS_Host` TEXT, `WS_Port` INTEGER, `WS_Username` TEXT, `WS_Password` TEXT, `Printer_UsePrinter` INTEGER NOT NULL, `Printer_SecondVia` TEXT NOT NULL, `Printer_CancelledCollections` INTEGER NOT NULL, `Printer_PrintType` TEXT NOT NULL, `Printer_Printer` TEXT, `Printer_PrintScale` INTEGER NOT NULL, `Printer_PrintCompartments` INTEGER NOT NULL, `Printer_PrintSample` INTEGER NOT NULL, `Printer_PrintTemperature` INTEGER NOT NULL, `Printer_PrintOccurrence` INTEGER NOT NULL, `Printer_PrintAlizarol` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperationType` TEXT, `LatestSync` TEXT, `Authentication_Username` TEXT, `Authentication_Password` TEXT, `Travel_Type` TEXT NOT NULL, `Travel_ReadBarcode` INTEGER NOT NULL, `Travel_WildcardProducer` INTEGER NOT NULL, `Travel_Transhipment` INTEGER NOT NULL, `Travel_CollectiveTankProduction` TEXT NOT NULL, `Travel_ReadSample` TEXT NOT NULL, `Travel_AcidMilk` INTEGER NOT NULL, `Travel_TypeTravelCodeReading` TEXT NOT NULL, `Travel_PlatformMeasure` TEXT NOT NULL, `Travel_MilkDensityType` TEXT NOT NULL, `Travel_AwaitDischarge` INTEGER NOT NULL, `Travel_TemperaturePicture` INTEGER NOT NULL, `Travel_Odometer` INTEGER NOT NULL, `Travel_ProductionTolerancePercentage` REAL, `Travel_Email` TEXT, `FTP_Host` TEXT, `FTP_Port` INTEGER, `FTP_Username` TEXT, `FTP_Folder` TEXT, `FTP_Password` TEXT, `WS_Host` TEXT, `WS_Port` INTEGER, `WS_Username` TEXT, `WS_Password` TEXT, `Printer_UsePrinter` INTEGER NOT NULL, `Printer_SecondVia` TEXT NOT NULL, `Printer_CancelledCollections` INTEGER NOT NULL, `Printer_PrintType` TEXT NOT NULL, `Printer_Printer` TEXT, `Printer_PrintScale` INTEGER NOT NULL, `Printer_PrintCompartments` INTEGER NOT NULL, `Printer_PrintSample` INTEGER NOT NULL, `Printer_PrintTemperature` INTEGER NOT NULL, `Printer_PrintOccurrence` INTEGER NOT NULL, `Printer_PrintAlizarol` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -299,6 +299,18 @@
           {
             "fieldPath": "latestSync",
             "columnName": "LatestSync",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "authentication.username",
+            "columnName": "Authentication_Username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "authentication.password",
+            "columnName": "Authentication_Password",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -411,14 +423,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "ftpSettings.password",
-            "columnName": "FTP_Password",
+            "fieldPath": "ftpSettings.folder",
+            "columnName": "FTP_Folder",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "ftpSettings.folder",
-            "columnName": "FTP_Folder",
+            "fieldPath": "ftpSettings.password",
+            "columnName": "FTP_Password",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -526,7 +538,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f2c710a53398766c8953ea5efef7a6ad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b51266041f3ced38e94d57ad88b48ebd')"
     ]
   }
 }

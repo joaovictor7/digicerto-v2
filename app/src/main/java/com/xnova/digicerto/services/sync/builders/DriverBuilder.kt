@@ -5,7 +5,11 @@ import com.xnova.digicerto.models.Driver
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.util.NumberUtil
 
-class DriverBuilder(context: Context) : Build(context, "TRANSPORTADOR") {
+class DriverBuilder(context: Context) : Builder(context, REGISTER_TYPE) {
+
+    companion object {
+        const val REGISTER_TYPE = "TRANSPORTADOR"
+    }
 
     override fun validate(line: List<String>): Boolean {
         return if (

@@ -1,20 +1,30 @@
 package com.xnova.digicerto.services.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.xnova.digicerto.services.viewholders.SettingsViewHolder
+import com.xnova.digicerto.databinding.RowSettingsBinding
 
 class SettingsAdapter : RecyclerView.Adapter<SettingsViewHolder>() {
+
+    private var mSettings: List<Pair<String,String>> = listOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsViewHolder {
-        TODO("Not yet implemented")
+        val binding = RowSettingsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return SettingsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SettingsViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(mSettings[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return mSettings.count()
     }
 
+    fun updateSettings(list: List<Pair<String,String>>){
+        mSettings = list
+        notifyDataSetChanged()
+    }
 }

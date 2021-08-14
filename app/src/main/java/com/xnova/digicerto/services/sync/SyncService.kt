@@ -34,7 +34,8 @@ abstract class SyncService(context: Context) {
 
     fun updateSyncData(): Observable<Boolean> {
         return Observable.create { emitter ->
-            mSettingsRepository.updateLatestSync()
+            mSettings.updateLatestSync()
+            mSettingsRepository.update(mSettings)
             emitter.onNext(true)
             emitter.onComplete()
         }

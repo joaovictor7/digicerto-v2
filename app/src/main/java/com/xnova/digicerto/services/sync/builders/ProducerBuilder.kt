@@ -6,7 +6,11 @@ import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.enums.TankType
 import com.xnova.digicerto.services.util.NumberUtil
 
-class ProducerBuilder(mContext: Context) : Build(mContext, "PRODUTOR") {
+class ProducerBuilder(mContext: Context) : Builder(mContext, REGISTER_TYPE) {
+
+    companion object {
+        const val REGISTER_TYPE = "PRODUTOR"
+    }
 
     override fun validate(line: List<String>): Boolean {
         return if (

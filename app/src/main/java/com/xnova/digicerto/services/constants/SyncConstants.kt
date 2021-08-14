@@ -52,5 +52,7 @@ class SyncConstants {
         }
     }
 
-    object WS
+    object WS {
+
+    }
 }

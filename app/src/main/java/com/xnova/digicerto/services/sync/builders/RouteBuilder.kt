@@ -5,7 +5,11 @@ import com.xnova.digicerto.models.Route
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.util.NumberUtil
 
-class RouteBuilder(context: Context) : Build(context, "ROTA") {
+class RouteBuilder(context: Context) : Builder(context, REGISTER_TYPE) {
+
+    companion object {
+        const val REGISTER_TYPE = "ROTA"
+    }
 
     override fun validate(line: List<String>): Boolean {
         return if (

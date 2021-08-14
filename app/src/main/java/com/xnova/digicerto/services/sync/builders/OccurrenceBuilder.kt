@@ -6,7 +6,11 @@ import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.enums.OccurrenceType
 import com.xnova.digicerto.services.util.NumberUtil
 
-class OccurrenceBuilder(context: Context) : Build(context, "OCORRENCIA") {
+class OccurrenceBuilder(context: Context) : Builder(context, REGISTER_TYPE) {
+
+    companion object {
+        const val REGISTER_TYPE = "OCORRENCIA"
+    }
 
     override fun validate(line: List<String>): Boolean {
         return if (

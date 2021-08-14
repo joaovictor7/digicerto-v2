@@ -7,7 +7,11 @@ import com.xnova.digicerto.models.relations.VehicleWithCompartments
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.util.NumberUtil
 
-class VehicleBuilder(context: Context) : Build(context, "VEICULO") {
+class VehicleBuilder(context: Context) : Builder(context, REGISTER_TYPE) {
+
+    companion object {
+        const val REGISTER_TYPE = "VEICULO"
+    }
 
     override fun validate(line: List<String>): Boolean {
         val compartments = getValidCompartmentsVehicle(line)
