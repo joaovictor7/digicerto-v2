@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">DIGIcerto</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Pagína Ínicial</string>
+    <string name="menu_settings">Configurações</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="text_digicerto">DIGIcerto</string>
+    <string name="text_compartments">Compartimentos</string>
+    <string name="text_code">Código</string>
+    <string name="text_tank_code">Código Tanque</string>
+    <string name="text_tank_type">Tipo Tanque</string>
+    <string name="text_avg_volume">Volume Médio</string>
+    <string name="text_producer_code">Código Produtor</string>
+    <string name="text_farm_code">Código Fazenda</string>
+    <string name="text_sequence">Sequência</string>
+    <string name="text_plate">Placa</string>
+    <string name="text_name">Nome</string>
+    <string name="text_occurrence_type">Tipo Ocorrência</string>
+    <string name="text_occurrence_description">Descrição Ocorrência</string>
+
+    <string name="msg_update_registers">Atualizando cadastros</string>
+    <string name="msg_error_file_value_unexpected">Há um valor inesperado nos registros de \"%1s\"</string>
+</resources>

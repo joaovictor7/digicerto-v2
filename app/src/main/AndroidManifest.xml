@@ -15,15 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true" >
         <activity
-            android:name=".ApplicationSettings"
-            android:exported="true"
-            android:label="@string/title_activity_application_settings"
-            android:theme="@style/Theme.DIGIcerto.NoActionBar" />
-        <activity
-            android:name=".ApplicationSettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_application_settings" />
-        <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:theme="@style/Theme.DIGIcerto.NoActionBar" >
             <intent-filter>
