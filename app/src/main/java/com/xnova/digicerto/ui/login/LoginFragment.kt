@@ -80,7 +80,7 @@ class LoginFragment : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    R.string.msg_invalid_credentials_login,
+                    R.string.msg_incorrect_username_password,
                     Toast.LENGTH_SHORT
                 )
                     .show()
@@ -110,8 +110,10 @@ class LoginFragment : BottomSheetDialogFragment() {
             binding().inputUsername.isErrorEnabled = false
         }
 
-        binding().editUsername.setOnFocusChangeListener { _, _ ->
-            binding().inputUsername.isErrorEnabled = false
+        binding().editUsername.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding().inputUsername.isErrorEnabled = false
+            }
         }
     }
 
@@ -120,8 +122,10 @@ class LoginFragment : BottomSheetDialogFragment() {
             binding().inputPassword.isErrorEnabled = false
         }
 
-        binding().editPassword.setOnFocusChangeListener { _, _ ->
-            binding().inputPassword.isErrorEnabled = false
+        binding().editPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding().inputPassword.isErrorEnabled = false
+            }
         }
     }
 

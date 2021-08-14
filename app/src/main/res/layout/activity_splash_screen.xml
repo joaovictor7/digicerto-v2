@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/text_digicerto"
-        style="@style/BorderText"
+        style="@style/Theme.DIGIcerto.BorderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -39,12 +39,12 @@
         android:id="@+id/text_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress_progressBar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/progress_progressBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

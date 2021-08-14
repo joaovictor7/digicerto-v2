@@ -12,13 +12,31 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/Theme.DIGIcerto.BottomSheet</item>
     </style>
 
+    <style name="Theme.DIGIcerto.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DIGIcerto.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- BottomSheet -->
+    <style name="Theme.DIGIcerto.BottomSheet" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Theme.DIGIcerto.BottomSheetModal</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Theme.DIGIcerto.BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet</item>
+    </style>
+
+    <!-- No Action Bar -->
     <style name="Theme.DIGIcerto.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Border Text -->
     <style name="Theme.DIGIcerto.BorderText">
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingBottom">4dp</item>
@@ -28,7 +46,10 @@
         <item name="android:shadowRadius">7</item>
     </style>
 
-    <style name="Theme.DIGIcerto.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!-- TextInput -->
+    <style name="Theme.DIGIcerto.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/brown_700</item>
+        <item name="boxStrokeColor">@color/brown_700</item>
+    </style>
 
-    <style name="Theme.DIGIcerto.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

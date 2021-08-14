@@ -11,7 +11,6 @@
     <string name="menu_settings">Configurações</string>
     <string name="menu_slideshow">Slideshow</string>
 
-    <string name="text_digicerto">DIGIcerto</string>
     <string name="text_compartments">Compartimentos</string>
     <string name="text_code">Código</string>
     <string name="text_tank_code">Código Tanque</string>
@@ -24,7 +23,31 @@
     <string name="text_name">Nome</string>
     <string name="text_occurrence_type">Tipo Ocorrência</string>
     <string name="text_occurrence_description">Descrição Ocorrência</string>
+    <string name="text_login">Login</string>
+    <string name="text_user">Usuário</string>
+    <string name="text_password">Senha</string>
+    <string name="text_travel">Viagem</string>
+    <string name="text_printer">Impressora</string>
+    <string name="text_application">Aplicativo</string>
+    <string name="text_web_service">Web Service</string>
+    <string name="text_FTP">FTP</string>
+    <string name="text_ok">OK</string>
+    <string name="text_unauthorized">Não autorizado</string>
+    <string name="text_mandatory">Obrigatório</string>
+    <string name="text_access_denied">Acesso negado</string>
+    <string name="text_update_failure">Falha na atualização</string>
+    <string name="text_update_registers">Atualizando cadastros</string>
 
     <string name="msg_update_registers">Atualizando cadastros</string>
     <string name="msg_error_file_value_unexpected">Há um valor inesperado nos registros de \"%1s\"</string>
+    <string name="msg_description_travel">Configurações relacionadas a viagem.</string>
+    <string name="msg_description_FTP">Configurações relacionadas ao FTP.</string>
+    <string name="msg_description_web_service">Configurações relacionadas ao Web Service.</string>
+    <string name="msg_description_application">Configurações relacionadas ao aplicativo.</string>
+    <string name="msg_description_printer">Configurações relacionadas a impressora bluetooth.</string>
+    <string name="msg_incorrect_username_password">Usuário ou senha incorreto</string>
+    <string name="msg_first_register">Registre o aplicativo primeiro</string>
+    <string name="msg_necessary_choosen_operation_type">Escolha um tipo de operação.\nIsso será necessário apenas essa vez.</string>
+    <string name="text_necessary_action">Ação necessária</string>
+
 </resources>
