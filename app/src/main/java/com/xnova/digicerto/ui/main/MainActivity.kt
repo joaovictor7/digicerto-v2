@@ -23,24 +23,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAppBarConfiguration: AppBarConfiguration
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mViewModel: MainViewModel
-    private lateinit var mView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
         mBinding = ActivityMainBinding.inflate(layoutInflater)
-        mView = mBinding.root
-        setContentView(mView)
-
+        setContentView(mBinding.root)
         setSupportActionBar(mBinding.appBarMain.toolbar)
+        setNavigationMenu()
 
         /*binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
-        setNavigationMenu()
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.data.daos
 
 import androidx.room.*
-import com.xnova.digicerto.models.Driver
+import com.xnova.digicerto.models.entities.Driver
 
 @Dao
 interface DriverDao {

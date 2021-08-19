@@ -1,8 +1,7 @@
-package com.xnova.digicerto.models.settings
+package com.xnova.digicerto.models.entities.settings
 
 import androidx.room.*
 import com.xnova.digicerto.services.enums.OperationType
-import com.xnova.digicerto.services.repositories.local.Converters
 import java.util.*
 
 @Entity(tableName = "Settings")
@@ -12,6 +11,7 @@ data class Settings(
     @ColumnInfo(name = "LatestSync") var latestSync: Calendar?,
     @Embedded(prefix = "Authentication_") var authentication: AuthenticationSettings?,
     @Embedded(prefix = "Travel_") val travelSettings: TravelSettings,
+    @Embedded(prefix = "Collect_") val collectSettings: CollectSettings,
     @Embedded(prefix = "FTP_") var ftpSettings: FTPSettings?,
     @Embedded(prefix = "WS_") val wsSettings: WSSettings?,
     @Embedded(prefix = "Printer_") val printerSettings: PrinterSettings

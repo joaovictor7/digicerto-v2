@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.sync.builders
 
 import android.content.Context
-import com.xnova.digicerto.models.Occurrence
+import com.xnova.digicerto.models.entities.Occurrence
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.enums.OccurrenceType
 import com.xnova.digicerto.services.util.NumberUtil

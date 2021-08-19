@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.sync.builders
 
 import android.content.Context
-import com.xnova.digicerto.models.Producer
+import com.xnova.digicerto.models.entities.Producer
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.enums.TankType
 import com.xnova.digicerto.services.util.NumberUtil

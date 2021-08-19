@@ -1,9 +1,9 @@
-package com.xnova.digicerto.models.relations
+package com.xnova.digicerto.models.entities.relations
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.xnova.digicerto.models.VehicleCompartment
-import com.xnova.digicerto.models.Vehicle
+import com.xnova.digicerto.models.entities.VehicleCompartment
+import com.xnova.digicerto.models.entities.Vehicle
 
 data class VehicleWithCompartments(
     @Embedded val vehicle: Vehicle,

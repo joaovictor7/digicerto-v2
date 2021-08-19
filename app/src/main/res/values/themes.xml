@@ -52,4 +52,26 @@
         <item name="boxStrokeColor">@color/brown_700</item>
     </style>
 
+    <!-- Toolbar Back -->
+    <style name="Theme.DIGIcerto.TollbarBack">
+        <item name="backgroundColor">@color/brown_700</item>
+    </style>
+
+    <!-- TextView Label Settings -->
+    <style name="Theme.DIGIcerto.LabelSettings" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- View Separator -->
+    <style name="Theme.DIGIcerto.ViewSeparator">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@color/grey_300</item>
+    </style>
+
 </resources>

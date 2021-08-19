@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.xnova.digicerto.models.Producer
+import com.xnova.digicerto.models.entities.Producer
 
 @Dao
 interface ProducerDao {

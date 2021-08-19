@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xnova.digicerto.R
-import com.xnova.digicerto.models.settings.AuthenticationSettings
-import com.xnova.digicerto.models.settings.FTPSettings
+import com.xnova.digicerto.models.entities.settings.AuthenticationSettings
+import com.xnova.digicerto.models.entities.settings.FTPSettings
 import com.xnova.digicerto.services.enums.OperationType
 import com.xnova.digicerto.services.data.DatabaseService
 import com.xnova.digicerto.services.sync.SyncFTPService

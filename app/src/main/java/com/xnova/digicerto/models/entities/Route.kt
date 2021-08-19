@@ -1,4 +1,4 @@
-package com.xnova.digicerto.models
+package com.xnova.digicerto.models.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

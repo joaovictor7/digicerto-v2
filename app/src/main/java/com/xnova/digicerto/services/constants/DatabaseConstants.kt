@@ -5,9 +5,9 @@ class DatabaseConstants private constructor() {
         const val INITIAL_INSERTION_QUERY =
             "insert into Settings " +
             "(Travel_Type, Travel_ReadBarcode, Travel_WildcardProducer, Travel_Transhipment, " +
-            " Travel_CollectiveTankProduction, Travel_ReadSample, Travel_AcidMilk, " +
+            " Collect_CollectiveTankProduction, Collect_ReadSample, Collect_AcidMilk, " +
             " Travel_TypeTravelCodeReading, Travel_PlatformMeasure, Travel_MilkDensityType, " +
-            " Travel_AwaitDischarge, Travel_TemperaturePicture, Travel_Odometer, Printer_UsePrinter, " +
+            " Travel_AwaitDischarge, Collect_TemperaturePicture, Travel_Odometer, Printer_UsePrinter, " +
             " Printer_SecondVia, Printer_CancelledCollections, Printer_PrintType, Printer_PrintScale, " +
             " Printer_PrintCompartments, Printer_PrintSample, Printer_PrintTemperature, " +
             " Printer_PrintOccurrence, Printer_PrintAlizarol)" +

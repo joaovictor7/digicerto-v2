@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.repositories.local
 
 import android.content.Context
-import com.xnova.digicerto.models.Producer
+import com.xnova.digicerto.models.entities.Producer
 import com.xnova.digicerto.services.data.DatabaseService
 
 class ProducerRepository(context: Context) {

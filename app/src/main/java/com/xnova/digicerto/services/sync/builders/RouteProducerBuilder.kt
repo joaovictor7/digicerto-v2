@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.sync.builders
 
 import android.content.Context
-import com.xnova.digicerto.models.RouteProducer
+import com.xnova.digicerto.models.entities.RouteProducer
 import com.xnova.digicerto.services.constants.SyncConstants
 import com.xnova.digicerto.services.util.NumberUtil
 

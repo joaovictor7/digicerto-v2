@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.xnova.digicerto.models.Vehicle
-import com.xnova.digicerto.models.VehicleCompartment
+import com.xnova.digicerto.models.entities.Vehicle
+import com.xnova.digicerto.models.entities.VehicleCompartment
 
 @Dao
 interface VehicleDao {

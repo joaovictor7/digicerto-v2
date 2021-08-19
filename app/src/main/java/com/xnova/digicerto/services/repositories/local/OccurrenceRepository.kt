@@ -1,7 +1,7 @@
 package com.xnova.digicerto.services.repositories.local
 
 import android.content.Context
-import com.xnova.digicerto.models.Occurrence
+import com.xnova.digicerto.models.entities.Occurrence
 import com.xnova.digicerto.services.data.DatabaseService
 
 class OccurrenceRepository(context: Context) {

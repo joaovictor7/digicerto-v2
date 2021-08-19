@@ -9,7 +9,7 @@ enum class OccurrenceType(val id: String) {
         }
 
         fun getById(id: String): OccurrenceType {
-            return OccurrenceType.values().find { it.id == id }!!
+            return values().find { it.id == id }!!
         }
     }
 }

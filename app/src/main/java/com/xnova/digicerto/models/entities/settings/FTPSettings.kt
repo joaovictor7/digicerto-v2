@@ -1,7 +1,6 @@
-package com.xnova.digicerto.models.settings
+package com.xnova.digicerto.models.entities.settings
 
 import androidx.room.ColumnInfo
-import androidx.room.Ignore
 import org.apache.commons.codec.binary.Base64
 
 data class FTPSettings(

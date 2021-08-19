@@ -1,8 +1,8 @@
 package com.xnova.digicerto.services.repositories.local
 
 import android.content.Context
-import com.xnova.digicerto.models.Route
-import com.xnova.digicerto.models.RouteProducer
+import com.xnova.digicerto.models.entities.Route
+import com.xnova.digicerto.models.entities.RouteProducer
 import com.xnova.digicerto.services.data.DatabaseService
 
 class RouteRepository(context: Context) {

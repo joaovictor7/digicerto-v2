@@ -1,8 +1,8 @@
 package com.xnova.digicerto.services.repositories.local
 
 import android.content.Context
-import com.xnova.digicerto.models.Vehicle
-import com.xnova.digicerto.models.VehicleCompartment
+import com.xnova.digicerto.models.entities.Vehicle
+import com.xnova.digicerto.models.entities.VehicleCompartment
 import com.xnova.digicerto.services.data.DatabaseService
 
 class VehicleRepository(context: Context) {

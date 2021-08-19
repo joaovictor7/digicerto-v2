@@ -3,8 +3,8 @@ package com.xnova.digicerto.services.data
 import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.xnova.digicerto.models.*
-import com.xnova.digicerto.models.settings.Settings
+import com.xnova.digicerto.models.entities.*
+import com.xnova.digicerto.models.entities.settings.Settings
 import com.xnova.digicerto.services.constants.DatabaseConstants
 import com.xnova.digicerto.services.repositories.local.Converters
 import com.xnova.digicerto.services.data.daos.*

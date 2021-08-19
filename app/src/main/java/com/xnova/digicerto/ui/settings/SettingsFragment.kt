@@ -1,5 +1,6 @@
 package com.xnova.digicerto.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.FragmentSettingsBinding
+import com.xnova.digicerto.models.MenuSettings
 import com.xnova.digicerto.services.adapters.SettingsAdapter
+import com.xnova.digicerto.services.constants.SettingsConstants
 import com.xnova.digicerto.services.enums.AlertDialogType
 import com.xnova.digicerto.services.enums.OperationType
 import com.xnova.digicerto.services.factories.AlertDialogFactory
 import com.xnova.digicerto.services.listeners.LoginListener
+import com.xnova.digicerto.services.listeners.MenuSettingsListener
 import com.xnova.digicerto.ui.login.LoginFragment
 import com.xnova.digicerto.ui.main.MainActivity
 
@@ -39,8 +43,8 @@ class SettingsFragment : Fragment() {
 
         observers()
         listeners()
-        setRecylerViews()
-        login()
+        recylerViews()
+        //login()
         necessaryChooseTypeOperation()
 
         return root
@@ -48,6 +52,7 @@ class SettingsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        mViewModel.updateEntities()
         setComponents()
     }
 
@@ -60,10 +65,6 @@ class SettingsFragment : Fragment() {
         settingsListPairObserver()
     }
 
-    private fun settingsObserver() {
-        //mViewModel.
-    }
-
     private fun settingsListPairObserver() {
         mViewModel.settingsListPair.observe(requireActivity(), {
             mSettingsAdapter.updateSettings(it)
@@ -72,6 +73,7 @@ class SettingsFragment : Fragment() {
 
     private fun listeners() {
         loginListener()
+        menuSettingsListener()
     }
 
     private fun loginListener() {
@@ -84,7 +86,22 @@ class SettingsFragment : Fragment() {
         })
     }
 
-    private fun setRecylerViews() {
+    private fun menuSettingsListener() {
+        mSettingsAdapter.onAttach(object : MenuSettingsListener {
+            override fun onClick(menu: MenuSettings) {
+                when (menu.id) {
+                    SettingsConstants.MENU.TRAVEL_ID -> startActivity(
+                        Intent(context, TravelSettingsActivity::class.java)
+                    )
+                    SettingsConstants.MENU.APPLICATION_ID -> startActivity(
+                        Intent(context, ApplicationSettingsActivity::class.java)
+                    )
+                }
+            }
+        })
+    }
+
+    private fun recylerViews() {
         setSettingsRecylerView()
     }
 

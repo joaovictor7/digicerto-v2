@@ -3,7 +3,7 @@ package com.xnova.digicerto.services.data.daos
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Update
-import com.xnova.digicerto.models.settings.Settings
+import com.xnova.digicerto.models.entities.settings.Settings
 
 @Dao
 interface SettingsDao {

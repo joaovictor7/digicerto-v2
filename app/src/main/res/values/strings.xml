@@ -37,6 +37,7 @@
     <string name="text_access_denied">Acesso negado</string>
     <string name="text_update_failure">Falha na atualização</string>
     <string name="text_update_registers">Atualizando cadastros</string>
+    <string name="text_necessary_action">Ação necessária</string>
 
     <string name="msg_update_registers">Atualizando cadastros</string>
     <string name="msg_error_file_value_unexpected">Há um valor inesperado nos registros de \"%1s\"</string>
@@ -48,6 +49,8 @@
     <string name="msg_incorrect_username_password">Usuário ou senha incorreto</string>
     <string name="msg_first_register">Registre o aplicativo primeiro</string>
     <string name="msg_necessary_choosen_operation_type">Escolha um tipo de operação.\nIsso será necessário apenas essa vez.</string>
-    <string name="text_necessary_action">Ação necessária</string>
+    <string name="text_collect">Coleta</string>
+    <string name="msg_description_collect">Configurações relacionadas a coleta.</string>
+    <string name="text_operation_type">Tipo de operação</string>
 
 </resources>
