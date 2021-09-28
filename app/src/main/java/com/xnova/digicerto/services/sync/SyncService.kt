@@ -3,7 +3,7 @@ package com.xnova.digicerto.services.sync
 import android.content.Context
 import com.xnova.digicerto.models.entities.*
 import com.xnova.digicerto.models.entities.relations.VehicleWithCompartments
-import com.xnova.digicerto.services.repositories.local.*
+import com.xnova.digicerto.services.repositories.local.entities.*
 import io.reactivex.rxjava3.core.Observable
 
 abstract class SyncService(context: Context) {

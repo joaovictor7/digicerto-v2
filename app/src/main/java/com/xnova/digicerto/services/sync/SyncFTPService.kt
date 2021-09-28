@@ -8,8 +8,9 @@ import io.reactivex.rxjava3.core.Observable
 import java.io.File
 import java.util.*
 
-class SyncFTPService(private val mContext: Context) : SyncService(mContext) {
+class SyncFTPService(context: Context) : SyncService(context) {
 
+    private val mContext = context
     private val mFTPSettings = mSettings.ftpSettings!!
     private val mFTPRepository = FTPRepository(mContext, mFTPSettings.host!!, mFTPSettings.port!!)
 

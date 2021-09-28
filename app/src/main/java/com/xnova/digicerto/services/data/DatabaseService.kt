@@ -1,12 +1,14 @@
 package com.xnova.digicerto.services.data
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.xnova.digicerto.models.entities.*
 import com.xnova.digicerto.models.entities.settings.Settings
 import com.xnova.digicerto.services.constants.DatabaseConstants
-import com.xnova.digicerto.services.repositories.local.Converters
 import com.xnova.digicerto.services.data.daos.*
 
 @Database(
@@ -18,13 +20,15 @@ import com.xnova.digicerto.services.data.daos.*
         Route::class,
         Vehicle::class,
         VehicleCompartment::class,
-        Settings::class
+        Settings::class,
+        Credential::class
     ], version = 1
 )
 @TypeConverters(Converters::class)
 abstract class DatabaseService : RoomDatabase() {
     abstract fun driverDao(): DriverDao
     abstract fun settingsDao(): SettingsDao
+    abstract fun credentialDao(): CredentialDao
     abstract fun occurrenceDao(): OccurrenceDao
     abstract fun producerDao(): ProducerDao
     abstract fun vehicleDao(): VehicleDao

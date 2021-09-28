@@ -1,16 +1,14 @@
 package com.xnova.digicerto.ui.settings
 
 import android.app.Application
-import android.view.Menu
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xnova.digicerto.R
 import com.xnova.digicerto.models.MenuSettings
-import com.xnova.digicerto.models.entities.settings.Settings
 import com.xnova.digicerto.services.constants.SettingsConstants
-import com.xnova.digicerto.services.enums.OperationType
-import com.xnova.digicerto.services.repositories.local.SettingsRepository
+import com.xnova.digicerto.services.enums.settings.OperationType
+import com.xnova.digicerto.services.repositories.local.entities.SettingsRepository
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -34,6 +32,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             SettingsConstants.MENU.COLLECT_ID,
             application.getString(R.string.text_collect),
             application.getString(R.string.msg_description_collect)
+        ),
+        MenuSettings(
+            SettingsConstants.MENU.FILE_ID,
+            application.getString(R.string.text_file),
+            application.getString(R.string.msg_description_file)
         )
     )
 
@@ -41,53 +44,48 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val mSettingsRepository = SettingsRepository(application)
     private var mSettings = mSettingsRepository.get()
 
-    private val mSettingsListPair = MutableLiveData<List<MenuSettings>>()
-    val settingsListPair: LiveData<List<MenuSettings>> = mSettingsListPair
+    private val mRefreshScreen = MutableLiveData<Boolean>()
+    val refreshScreen: LiveData<Boolean> = mRefreshScreen
 
-    fun updateEntities() {
-        mSettings = mSettingsRepository.get()
+    fun getMenuSettings(): List<MenuSettings> {
+        val menuList = mMenuSettings.toMutableList()
+
+        if (mSettings.operationType == OperationType.FTP) {
+            menuList.add(
+                MenuSettings(
+                    SettingsConstants.MENU.FTP_ID,
+                    mApplication.getString(R.string.text_FTP),
+                    mApplication.getString(R.string.msg_description_FTP)
+                )
+            )
+        } else if (mSettings.operationType == OperationType.WebService) {
+            menuList.add(
+                MenuSettings(
+                    SettingsConstants.MENU.WS_ID,
+                    mApplication.getString(R.string.text_web_service),
+                    mApplication.getString(R.string.msg_description_web_service)
+                )
+            )
+        }
+
+        return menuList
     }
 
-    fun loginAvailable(): Boolean {
-        return mSettings.authenticationAvailable
-    }
-
-    fun loadSettings() {
-        mSettingsListPair.value = getMenuSettings().sortedBy { it.title }
+    fun setOperationType(operationType: OperationType) {
+        mSettings.operationType = operationType
     }
 
     fun necessaryChooseTypeOperation(): Boolean {
         return mSettings.necessaryChooseTypeOperation
     }
 
-    fun setOperationType(operationType: OperationType) {
-        mSettings.operationType = operationType
+    fun save() {
         mSettingsRepository.update(mSettings)
+        refreshEntities()
     }
 
-    private fun getMenuSettings(): List<MenuSettings> {
-        val listMenu = mMenuSettings.toMutableList()
-        return when (mSettings.operationType) {
-            OperationType.FTP -> {
-                listMenu.add(
-                    MenuSettings(
-                        SettingsConstants.MENU.FTP_ID,
-                        mApplication.getString(R.string.text_FTP),
-                        mApplication.getString(R.string.msg_description_FTP)
-                    )
-                )
-                listMenu
-            }
-            else -> {
-                listMenu.add(
-                    MenuSettings(
-                        SettingsConstants.MENU.WS_ID,
-                        mApplication.getString(R.string.text_web_service),
-                        mApplication.getString(R.string.msg_description_web_service)
-                    )
-                )
-                listMenu
-            }
-        }
+    fun refreshEntities() {
+        mSettings = mSettingsRepository.get()
+        mRefreshScreen.value = true
     }
 }

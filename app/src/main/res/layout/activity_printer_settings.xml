@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.settings.printer.PrinterSettingsActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_use_printer"
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_user_printer" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:text="@string/text_printer_used" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_bluetooth_printer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_mandatory_printer"
+                    style="@style/Theme.DIGIcerto.MandatoryLabelSettings" />
+
+                <TextView
+                    android:id="@+id/text_printer_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_collect_cancelled"
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_print_cancelled_collections" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:text="@string/text_printer_layout" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_layout_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/text_complete" />
+
+                    <RadioButton
+                        android:id="@+id/radio_layout_summed_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_summed_up" />
+
+                </RadioGroup>
+
+                <View style="@style/Theme.DIGIcerto.ViewSeparator" />
+
+                <TextView
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:text="@string/text_duplicate_receipt" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/radio_dupplicate_none"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/text_ignore" />
+
+                    <RadioButton
+                        android:id="@+id/radio_dupplicate_ever"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_ever" />
+
+                    <RadioButton
+                        android:id="@+id/radio_dupplicate_optional"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_optional" />
+
+                </RadioGroup>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/text_data_print"
+                    style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:text="@string/text_data_print"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_scale"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_scale"
+                    app:layout_constraintEnd_toStartOf="@+id/check_print_compartments"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_data_print" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_compartments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_compartments"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@+id/check_print_scale"
+                    app:layout_constraintTop_toBottomOf="@+id/text_data_print" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_sample"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_sample"
+                    app:layout_constraintEnd_toStartOf="@+id/check_print_temperature"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/check_print_scale" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_temperature"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_temperature"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/check_print_sample"
+                    app:layout_constraintTop_toBottomOf="@+id/check_print_compartments" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_occurrence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_occurrence"
+                    app:layout_constraintEnd_toStartOf="@+id/check_print_alizarol"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/check_print_sample" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_print_alizarol"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_alizarol"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/check_print_occurrence"
+                    app:layout_constraintTop_toBottomOf="@+id/check_print_temperature" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

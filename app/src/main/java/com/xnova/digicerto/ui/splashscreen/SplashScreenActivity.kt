@@ -6,9 +6,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.xnova.digicerto.ui.main.MainActivity
 import com.xnova.digicerto.databinding.ActivitySplashScreenBinding
+import com.xnova.digicerto.ui.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -38,18 +39,13 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        actionObserve()
-        nextPageObserve()
-    }
-
-    private fun actionObserve() {
-        mViewModel.action.observe(this, {
-            mBinding.textAction.visibility = View.VISIBLE
-            mBinding.textAction.text = it
+        mViewModel.msgAction.observe(this, {
+            if (it.first || mBinding.textAction.isVisible) {
+                mBinding.textAction.visibility = View.VISIBLE
+                mBinding.textAction.text = it.second
+            }
         })
-    }
 
-    private fun nextPageObserve() {
         mViewModel.nextPage.observe(this, {
             if (it) {
                 startActivity(Intent(this, MainActivity::class.java))

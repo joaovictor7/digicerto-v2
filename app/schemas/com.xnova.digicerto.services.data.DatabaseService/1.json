@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0198bc790f9a80ecc5fb6e26e0173c6a",
+    "identityHash": "2adddd65cfb14ea3377c62b5b9d914d8",
     "entities": [
       {
         "tableName": "Driver",
@@ -282,7 +282,7 @@
       },
       {
         "tableName": "Settings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperationType` TEXT, `LatestSync` TEXT, `Authentication_Username` TEXT, `Authentication_Password` TEXT, `Travel_Type` TEXT NOT NULL, `Travel_ReadBarcode` INTEGER NOT NULL, `Travel_WildcardProducer` INTEGER NOT NULL, `Travel_Transhipment` INTEGER NOT NULL, `Travel_TypeTravelCodeReading` TEXT NOT NULL, `Travel_PlatformMeasure` TEXT NOT NULL, `Travel_MilkDensityType` TEXT NOT NULL, `Travel_AwaitDischarge` INTEGER NOT NULL, `Travel_Odometer` INTEGER NOT NULL, `Travel_Email` TEXT, `Collect_CollectiveTankProduction` TEXT NOT NULL, `Collect_ReadSample` TEXT NOT NULL, `Collect_AcidMilk` INTEGER NOT NULL, `Collect_TemperaturePicture` INTEGER NOT NULL, `Collect_ProductionTolerancePercentage` REAL, `FTP_Host` TEXT, `FTP_Port` INTEGER, `FTP_Username` TEXT, `FTP_Folder` TEXT, `FTP_Password` TEXT, `WS_Host` TEXT, `WS_Port` INTEGER, `WS_Username` TEXT, `WS_Password` TEXT, `Printer_UsePrinter` INTEGER NOT NULL, `Printer_SecondVia` TEXT NOT NULL, `Printer_CancelledCollections` INTEGER NOT NULL, `Printer_PrintType` TEXT NOT NULL, `Printer_Printer` TEXT, `Printer_PrintScale` INTEGER NOT NULL, `Printer_PrintCompartments` INTEGER NOT NULL, `Printer_PrintSample` INTEGER NOT NULL, `Printer_PrintTemperature` INTEGER NOT NULL, `Printer_PrintOccurrence` INTEGER NOT NULL, `Printer_PrintAlizarol` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperationType` TEXT, `Email` TEXT, `LatestSync` TEXT, `File_CollectCancelled` INTEGER NOT NULL, `Travel_Type` TEXT NOT NULL, `Travel_ProducerCodeReading` INTEGER NOT NULL, `Travel_WildcardProducer` INTEGER NOT NULL, `Travel_Transhipment` INTEGER NOT NULL, `Travel_TravelCodeReading` TEXT NOT NULL, `Travel_PlatformMeasure` TEXT NOT NULL, `Travel_MilkDensity` TEXT NOT NULL, `Travel_AwaitDischarge` INTEGER NOT NULL, `Travel_OdometerRegister` TEXT NOT NULL, `Collect_CollectiveTankCollection` TEXT NOT NULL, `Collect_RegisterSample` TEXT NOT NULL, `Collect_AcidMilk` INTEGER NOT NULL, `Collect_TemperaturePicture` INTEGER NOT NULL, `Collect_ProductionTolerancePercentage` REAL, `FTP_Host` TEXT, `FTP_Port` INTEGER, `FTP_Username` TEXT, `FTP_Password` TEXT, `FTP_Folder` TEXT, `WS_Host` TEXT, `WS_Port` INTEGER, `WS_Username` TEXT, `WS_Password` TEXT, `Printer_UsePrinter` INTEGER NOT NULL, `Printer_Dupplicate` TEXT NOT NULL, `Printer_CollectCancelled` INTEGER NOT NULL, `Printer_Layout` TEXT NOT NULL, `Printer_Printer` TEXT, `Printer_MacAddress` TEXT, `Printer_PrintScale` INTEGER NOT NULL, `Printer_PrintCompartments` INTEGER NOT NULL, `Printer_PrintSample` INTEGER NOT NULL, `Printer_PrintTemperature` INTEGER NOT NULL, `Printer_PrintOccurrence` INTEGER NOT NULL, `Printer_PrintAlizarol` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -297,22 +297,22 @@
             "notNull": false
           },
           {
+            "fieldPath": "email",
+            "columnName": "Email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "latestSync",
             "columnName": "LatestSync",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "authentication.username",
-            "columnName": "Authentication_Username",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "authentication.password",
-            "columnName": "Authentication_Password",
-            "affinity": "TEXT",
-            "notNull": false
+            "fieldPath": "fileSettings.collectCancelled",
+            "columnName": "File_CollectCancelled",
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "travelSettings.type",
@@ -321,8 +321,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "travelSettings.readBarcode",
-            "columnName": "Travel_ReadBarcode",
+            "fieldPath": "travelSettings.producerCodeReading",
+            "columnName": "Travel_ProducerCodeReading",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -339,8 +339,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "travelSettings.typeTravelCodeReading",
-            "columnName": "Travel_TypeTravelCodeReading",
+            "fieldPath": "travelSettings.travelCodeReading",
+            "columnName": "Travel_TravelCodeReading",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -351,8 +351,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "travelSettings.milkDensityType",
-            "columnName": "Travel_MilkDensityType",
+            "fieldPath": "travelSettings.milkDensity",
+            "columnName": "Travel_MilkDensity",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -363,26 +363,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "travelSettings.odometer",
-            "columnName": "Travel_Odometer",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "travelSettings.email",
-            "columnName": "Travel_Email",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "collectSettings.collectiveTankProduction",
-            "columnName": "Collect_CollectiveTankProduction",
+            "fieldPath": "travelSettings.odometerRegister",
+            "columnName": "Travel_OdometerRegister",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "collectSettings.readSample",
-            "columnName": "Collect_ReadSample",
+            "fieldPath": "collectSettings.collectiveTankCollection",
+            "columnName": "Collect_CollectiveTankCollection",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collectSettings.registerSample",
+            "columnName": "Collect_RegisterSample",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -423,14 +417,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "ftpSettings.folder",
-            "columnName": "FTP_Folder",
+            "fieldPath": "ftpSettings.password",
+            "columnName": "FTP_Password",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "ftpSettings.password",
-            "columnName": "FTP_Password",
+            "fieldPath": "ftpSettings.folder",
+            "columnName": "FTP_Folder",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -465,63 +459,101 @@
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.secondVia",
-            "columnName": "Printer_SecondVia",
+            "fieldPath": "printerSettings.dupplicate",
+            "columnName": "Printer_Dupplicate",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.canceledCollections",
-            "columnName": "Printer_CancelledCollections",
+            "fieldPath": "printerSettings.collectCancelled",
+            "columnName": "Printer_CollectCancelled",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.printType",
-            "columnName": "Printer_PrintType",
+            "fieldPath": "printerSettings.layoutPrinter",
+            "columnName": "Printer_Layout",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.printer",
+            "fieldPath": "printerSettings.printerData.printer",
             "columnName": "Printer_Printer",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "printerSettings.data.printScale",
+            "fieldPath": "printerSettings.printerData.macAddress",
+            "columnName": "Printer_MacAddress",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "printerSettings.dataPrint.printScale",
             "columnName": "Printer_PrintScale",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.data.printCompartments",
+            "fieldPath": "printerSettings.dataPrint.printCompartments",
             "columnName": "Printer_PrintCompartments",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.data.printSample",
+            "fieldPath": "printerSettings.dataPrint.printSample",
             "columnName": "Printer_PrintSample",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.data.printTemperature",
+            "fieldPath": "printerSettings.dataPrint.printTemperature",
             "columnName": "Printer_PrintTemperature",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.data.printOccurrence",
+            "fieldPath": "printerSettings.dataPrint.printOccurrence",
             "columnName": "Printer_PrintOccurrence",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "printerSettings.data.printAlizarol",
+            "fieldPath": "printerSettings.dataPrint.printAlizarol",
             "columnName": "Printer_PrintAlizarol",
             "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Credential",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Username` TEXT NOT NULL, `Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Password` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "username",
+            "columnName": "Username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "Id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "Password",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -538,7 +570,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0198bc790f9a80ecc5fb6e26e0173c6a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2adddd65cfb14ea3377c62b5b9d914d8')"
     ]
   }
 }

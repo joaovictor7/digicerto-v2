@@ -3,7 +3,7 @@ package com.xnova.digicerto.services.sync.builders
 import android.content.Context
 import com.xnova.digicerto.models.entities.Occurrence
 import com.xnova.digicerto.services.constants.SyncConstants
-import com.xnova.digicerto.services.enums.OccurrenceType
+import com.xnova.digicerto.services.enums.settings.occurrence.OccurrenceType
 import com.xnova.digicerto.services.util.NumberUtil
 
 class OccurrenceBuilder(context: Context) : Builder(context, REGISTER_TYPE) {

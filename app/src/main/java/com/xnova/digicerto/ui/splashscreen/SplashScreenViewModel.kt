@@ -5,10 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.xnova.digicerto.R
-import com.xnova.digicerto.models.entities.settings.AuthenticationSettings
-import com.xnova.digicerto.models.entities.settings.FTPSettings
-import com.xnova.digicerto.services.enums.OperationType
-import com.xnova.digicerto.services.data.DatabaseService
+import com.xnova.digicerto.models.entities.Credential
+import com.xnova.digicerto.services.enums.settings.OperationType
+import com.xnova.digicerto.services.repositories.local.entities.CredentialRepository
+import com.xnova.digicerto.services.repositories.local.entities.SettingsRepository
 import com.xnova.digicerto.services.sync.SyncFTPService
 import com.xnova.digicerto.services.sync.SyncService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -17,12 +17,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class SplashScreenViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mContext = application
-    private val mDatabaseRepository = DatabaseService.getDatabase(application)
+    private val mApplication = application
+    private val mSettings = SettingsRepository(application).get()
     private lateinit var mSyncService: SyncService
 
-    private var mAction = MutableLiveData<String>()
-    val action: LiveData<String> = mAction
+    private var mMsgAction = MutableLiveData<Pair<Boolean, String>>()
+    val msgAction: LiveData<Pair<Boolean, String>> = mMsgAction
 
     private var mNextPage = MutableLiveData<Boolean>()
     val nextPage: LiveData<Boolean> = mNextPage
@@ -31,7 +31,7 @@ class SplashScreenViewModel(application: Application) : AndroidViewModel(applica
         temporary()
         Observable.concatArray(syncData())
             .subscribe({ }, {
-                mAction.value = mContext.getString(R.string.text_update_failure)
+                mMsgAction.value = Pair(false, mApplication.getString(R.string.text_failure))
                 mNextPage.value = true
             }, {
                 mNextPage.value = true
@@ -39,19 +39,27 @@ class SplashScreenViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun syncData(): Observable<Boolean> {
-        val settings = mDatabaseRepository.settingsDao().get()
-        if (!settings.operationTypeAvailable) {
+        if (!mSettings.operationTypeAvailable) {
             return Observable.empty()
         }
 
-        return if (settings.operationType == OperationType.FTP) syncDataFTP() else syncDataWS()
+        return if (mSettings.operationType == OperationType.FTP && mSettings.ftpOperationAvailable) {
+            syncDataFTP()
+        } else if (mSettings.wsOperationAvailable) {
+            syncDataWS()
+        } else {
+            Observable.empty()
+        }
     }
 
     private fun syncDataFTP(): Observable<Boolean> {
-        mSyncService = SyncFTPService(getApplication())
+
+        mSyncService = SyncFTPService(mApplication)
         return mSyncService.necessarySync()
             .flatMap {
-                mAction.postValue(getApplication<Application>().getString(R.string.text_update_registers))
+                mMsgAction.postValue(
+                    Pair(true, mApplication.getString(R.string.text_update_registers))
+                )
                 mSyncService.retrieveData()
             }
             .flatMap { mSyncService.syncProducers() }
@@ -69,7 +77,9 @@ class SplashScreenViewModel(application: Application) : AndroidViewModel(applica
         mSyncService = SyncFTPService(getApplication())
         return mSyncService.necessarySync()
             .flatMap {
-                mAction.postValue(getApplication<Application>().getString(R.string.text_update_registers))
+                mMsgAction.postValue(
+                    Pair(true, mApplication.getString(R.string.text_update_registers))
+                )
                 mSyncService.retrieveData()
             }
             .flatMap { mSyncService.syncProducers() }
@@ -83,16 +93,9 @@ class SplashScreenViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun temporary() {
-        val settings = mDatabaseRepository.settingsDao().get()
-
-        val ftpSettings = FTPSettings("187.45.193.203", 21, "xnova", "/teste/")
-        ftpSettings.setPasswordDecrypted("semparar9")
-        settings.ftpSettings = ftpSettings
-
         val authentication =
-            AuthenticationSettings("1").apply { setPasswordDecrypted("1") }
-        settings.authentication = authentication
+            Credential("1").apply { setPasswordDecrypted("1") }
 
-        mDatabaseRepository.settingsDao().update(settings)
+        CredentialRepository(mApplication).addOrUpdate(authentication)
     }
 }

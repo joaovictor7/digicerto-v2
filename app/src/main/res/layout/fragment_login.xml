@@ -8,10 +8,11 @@
     android:windowSoftInputMode="adjustResize"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/text_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="@string/text_login"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/input_username"
@@ -21,40 +22,43 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_username"
-        style="@style/Theme.DIGIcerto.TextInput"
+        style="@style/Theme.DIGIcerto.TextInputOutline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:autofillHints="@string/text_user"
         android:hint="@string/text_user"
         app:layout_constraintBottom_toTopOf="@+id/input_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_login">
+        app:layout_constraintTop_toBottomOf="@+id/text_login"
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_password"
-        style="@style/Theme.DIGIcerto.TextInput"
+        style="@style/Theme.DIGIcerto.TextInputOutline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_username">
+        app:layout_constraintTop_toBottomOf="@+id/input_username"
+        app:startIconDrawable="@drawable/ic_baseline_security_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +67,6 @@
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:backgroundTint="@color/brown_700"
         android:text="@string/text_login"
         app:layout_constraintEnd_toEndOf="parent"

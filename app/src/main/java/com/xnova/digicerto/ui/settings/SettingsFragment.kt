@@ -5,30 +5,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.FragmentSettingsBinding
 import com.xnova.digicerto.models.MenuSettings
-import com.xnova.digicerto.services.adapters.SettingsAdapter
+import com.xnova.digicerto.services.adapters.MenuSettingsAdapter
 import com.xnova.digicerto.services.constants.SettingsConstants
-import com.xnova.digicerto.services.enums.AlertDialogType
-import com.xnova.digicerto.services.enums.OperationType
-import com.xnova.digicerto.services.factories.AlertDialogFactory
+import com.xnova.digicerto.services.enums.settings.OperationType
+import com.xnova.digicerto.services.factories.AlertFactory
 import com.xnova.digicerto.services.listeners.LoginListener
 import com.xnova.digicerto.services.listeners.MenuSettingsListener
 import com.xnova.digicerto.ui.login.LoginFragment
 import com.xnova.digicerto.ui.main.MainActivity
+import com.xnova.digicerto.ui.settings.application.ApplicationSettingsActivity
+import com.xnova.digicerto.ui.settings.collect.CollectSettingsActivity
+import com.xnova.digicerto.ui.settings.file.FileSettingsActivity
+import com.xnova.digicerto.ui.settings.ftp.FTPSettingsActivity
+import com.xnova.digicerto.ui.settings.printer.PrinterSettingsActivity
+import com.xnova.digicerto.ui.settings.travel.TravelSettingsActivity
+import com.xnova.digicerto.ui.settings.ws.WSSettingsActivity
 
 class SettingsFragment : Fragment() {
 
     private val mLoginFragment = LoginFragment()
-    private val mSettingsAdapter = SettingsAdapter()
-
-    private lateinit var mViewModel: SettingsViewModel
+    private val mMenuSettingsAdapter = MenuSettingsAdapter()
     private var mBinding: FragmentSettingsBinding? = null
+    private lateinit var mViewModel: SettingsViewModel
+    private lateinit var mAlertFactory: AlertFactory
 
     private fun binding() = mBinding!!
 
@@ -37,23 +42,22 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
         mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root = binding().root
+        mViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
-        observers()
+        mAlertFactory = AlertFactory(requireContext())
+
         listeners()
-        recylerViews()
+        observers()
+        adapters()
         //login()
-        necessaryChooseTypeOperation()
 
-        return root
+        return binding().root
     }
 
     override fun onResume() {
         super.onResume()
-        mViewModel.updateEntities()
-        setComponents()
+        mViewModel.refreshEntities()
     }
 
     override fun onDestroyView() {
@@ -62,32 +66,23 @@ class SettingsFragment : Fragment() {
     }
 
     private fun observers() {
-        settingsListPairObserver()
-    }
-
-    private fun settingsListPairObserver() {
-        mViewModel.settingsListPair.observe(requireActivity(), {
-            mSettingsAdapter.updateSettings(it)
+        mViewModel.refreshScreen.observe(requireActivity(), {
+            setComponents()
         })
     }
 
     private fun listeners() {
-        loginListener()
-        menuSettingsListener()
-    }
-
-    private fun loginListener() {
         mLoginFragment.onAttach(object : LoginListener {
             override fun authenticate(authenticated: Boolean) {
-                if (!authenticated) {
+                if (authenticated) {
+                    showChooseTypeOperationAlert()
+                } else {
                     homePageChange()
                 }
             }
         })
-    }
 
-    private fun menuSettingsListener() {
-        mSettingsAdapter.onAttach(object : MenuSettingsListener {
+        mMenuSettingsAdapter.setListener(object : MenuSettingsListener {
             override fun onClick(menu: MenuSettings) {
                 when (menu.id) {
                     SettingsConstants.MENU.TRAVEL_ID -> startActivity(
@@ -96,62 +91,55 @@ class SettingsFragment : Fragment() {
                     SettingsConstants.MENU.APPLICATION_ID -> startActivity(
                         Intent(context, ApplicationSettingsActivity::class.java)
                     )
+                    SettingsConstants.MENU.COLLECT_ID -> startActivity(
+                        Intent(context, CollectSettingsActivity::class.java)
+                    )
+                    SettingsConstants.MENU.FTP_ID -> startActivity(
+                        Intent(context, FTPSettingsActivity::class.java)
+                    )
+                    SettingsConstants.MENU.WS_ID -> startActivity(
+                        Intent(context, WSSettingsActivity::class.java)
+                    )
+                    SettingsConstants.MENU.FILE_ID -> startActivity(
+                        Intent(context, FileSettingsActivity::class.java)
+                    )
+                    SettingsConstants.MENU.PRINTER_ID -> startActivity(
+                        Intent(context, PrinterSettingsActivity::class.java)
+                    )
                 }
             }
         })
     }
 
-    private fun recylerViews() {
-        setSettingsRecylerView()
-    }
-
-    private fun setSettingsRecylerView() {
+    private fun adapters() {
         val recycler = binding().recyclerSettings
         recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = mSettingsAdapter
-    }
-
-    private fun login() {
-        if (!mViewModel.loginAvailable()) {
-            showAlert(R.string.text_access_denied, R.string.msg_first_register)
-            homePageChange()
-            return
-        }
-
-        mLoginFragment.show(parentFragmentManager, LoginFragment.TAG)
-    }
-
-    private fun necessaryChooseTypeOperation() {
-        if (mViewModel.necessaryChooseTypeOperation()) {
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setMessage(R.string.msg_necessary_choosen_operation_type)
-                .setCancelable(false)
-                .setTitle(R.string.text_necessary_action)
-                .setNegativeButton(R.string.text_FTP) { dialog, _ ->
-                    mViewModel.setOperationType(OperationType.FTP)
-                    dialog.dismiss()
-                    setComponents()
-                }
-                .setPositiveButton(R.string.text_web_service) { dialog, _ ->
-                    mViewModel.setOperationType(OperationType.WebService)
-                    dialog.dismiss()
-                    setComponents()
-                }
-
-            return builder.create().show()
-        } else {
-            setComponents()
-        }
+        recycler.adapter = mMenuSettingsAdapter
     }
 
     private fun setComponents() {
-        mViewModel.loadSettings()
+        mMenuSettingsAdapter.setMenuSettings(mViewModel.getMenuSettings())
     }
 
-    private fun showAlert(titleId: Int, messageId: Int) {
-        AlertDialogFactory(requireContext())
-            .getInstance(AlertDialogType.Info, titleId, messageId)
-            .show()
+    private fun login() {
+        mLoginFragment.show(childFragmentManager, LoginFragment.TAG)
+    }
+
+    private fun showChooseTypeOperationAlert() {
+        mAlertFactory.getInstance(R.string.text_necessary_action,
+            R.string.msg_necessary_choosen_operation_type,
+            textIdPositive = R.string.text_web_service,
+            actionPositive = { dialog, _ ->
+                dialog.dismiss()
+                mViewModel.setOperationType(OperationType.WebService)
+                mViewModel.save()
+            },
+            textIdNegative = R.string.text_FTP,
+            actionNegative = { dialog, _ ->
+                dialog.dismiss()
+                mViewModel.setOperationType(OperationType.FTP)
+                mViewModel.save()
+            }).show()
     }
 
     private fun homePageChange() {

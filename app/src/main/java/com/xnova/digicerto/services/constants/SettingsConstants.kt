@@ -9,5 +9,6 @@ class SettingsConstants private constructor(){
         const val WS_ID = 4
         const val FTP_ID = 5
         const val COLLECT_ID = 6
+        const val FILE_ID = 7
     }
 }

@@ -3,8 +3,7 @@ package com.xnova.digicerto.models.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.xnova.digicerto.services.enums.OccurrenceType
-import com.xnova.digicerto.services.enums.TankType
+import com.xnova.digicerto.services.enums.settings.occurrence.OccurrenceType
 
 @Entity(tableName = "Occurrence")
 data class Occurrence(
