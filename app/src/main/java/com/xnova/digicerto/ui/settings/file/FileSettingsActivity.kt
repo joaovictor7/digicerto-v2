@@ -3,14 +3,13 @@ package com.xnova.digicerto.ui.settings.file
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityFileSettingsBinding
 import com.xnova.digicerto.models.entities.settings.FileSettings
+import com.xnova.digicerto.ui.BaseActivity
 
-class FileSettingsActivity : AppCompatActivity() {
+class FileSettingsActivity : BaseActivity(R.string.text_file) {
 
     private lateinit var mBinding: ActivityFileSettingsBinding
     private lateinit var mViewModel: FileSettingsViewModel
@@ -20,9 +19,9 @@ class FileSettingsActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProvider(this).get(FileSettingsViewModel::class.java)
         mBinding = ActivityFileSettingsBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        actionBar()
         observers()
         setComponents()
     }
@@ -41,11 +40,6 @@ class FileSettingsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_file)
     }
 
     private fun observers() {
@@ -67,9 +61,5 @@ class FileSettingsActivity : AppCompatActivity() {
 
         val fileSettings = FileSettings(collectCancelled)
         mViewModel.fileSettings = fileSettings
-    }
-
-    private fun showSnackBar(messageId: Int) {
-        Snackbar.make(mBinding.root, messageId, Snackbar.LENGTH_LONG).show()
     }
 }

@@ -8,9 +8,9 @@ import com.xnova.digicerto.R
 import com.xnova.digicerto.models.Alert
 import com.xnova.digicerto.models.BluetoothDevice
 import com.xnova.digicerto.services.enums.AlertType
-import com.xnova.digicerto.services.repositories.remote.BluetoothRepository
-import com.xnova.digicerto.services.repositories.local.entities.SettingsRepository
 import com.xnova.digicerto.services.repositories.local.PrinterRepository
+import com.xnova.digicerto.services.repositories.local.entities.SettingsRepository
+import com.xnova.digicerto.services.repositories.remote.BluetoothRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 

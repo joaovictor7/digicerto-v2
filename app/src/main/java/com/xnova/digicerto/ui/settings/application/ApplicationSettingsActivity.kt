@@ -3,17 +3,16 @@ package com.xnova.digicerto.ui.settings.application
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityApplicationSettingsBinding
 import com.xnova.digicerto.services.enums.settings.OperationType
 import com.xnova.digicerto.services.factories.inputs.OnClickFactory
 import com.xnova.digicerto.services.factories.inputs.TextWatcherFactory
 import com.xnova.digicerto.services.util.StringUtil
+import com.xnova.digicerto.ui.BaseActivity
 
-class ApplicationSettingsActivity : AppCompatActivity() {
+class ApplicationSettingsActivity : BaseActivity(R.string.text_application) {
 
     private lateinit var mBinding: ActivityApplicationSettingsBinding
     private lateinit var mViewModel: ApplicationSettingsViewModel
@@ -23,9 +22,9 @@ class ApplicationSettingsActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProvider(this).get(ApplicationSettingsViewModel::class.java)
         mBinding = ActivityApplicationSettingsBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        actionBar()
         listeners()
         observers()
         setComponents()
@@ -47,11 +46,6 @@ class ApplicationSettingsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_application)
     }
 
     private fun listeners() {
@@ -101,9 +95,5 @@ class ApplicationSettingsActivity : AppCompatActivity() {
         }
 
         return valid
-    }
-
-    private fun showSnackBar(messageId: Int) {
-        Snackbar.make(mBinding.root, messageId, Snackbar.LENGTH_LONG).show()
     }
 }

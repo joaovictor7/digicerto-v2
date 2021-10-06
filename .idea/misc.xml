@@ -15,7 +15,7 @@
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_application_settings.xml" value="0.25" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_collect_settings.xml" value="0.22" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_file_settings.xml" value="0.15789473684210525" />
-        <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_ftp_settings.xml" value="0.23170731707317074" />
+        <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_ftp_settings.xml" value="0.5" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_printer_settings.xml" value="0.25" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/activity_splash_screen.xml" value="0.28486293206197855" />
@@ -27,6 +27,7 @@
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/content_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/fragment_register.xml" value="0.31634182908545727" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
         <entry key="..\:/Projetos/Kotlyn/DIGIcerto/app/src/main/res/layout/nav_header_main.xml" value="0.16" />
@@ -43,7 +44,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

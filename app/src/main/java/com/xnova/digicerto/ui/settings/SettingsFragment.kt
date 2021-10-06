@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xnova.digicerto.R
@@ -14,9 +13,9 @@ import com.xnova.digicerto.models.MenuSettings
 import com.xnova.digicerto.services.adapters.MenuSettingsAdapter
 import com.xnova.digicerto.services.constants.SettingsConstants
 import com.xnova.digicerto.services.enums.settings.OperationType
-import com.xnova.digicerto.services.factories.AlertFactory
 import com.xnova.digicerto.services.listeners.LoginListener
 import com.xnova.digicerto.services.listeners.MenuSettingsListener
+import com.xnova.digicerto.ui.BaseFragment
 import com.xnova.digicerto.ui.login.LoginFragment
 import com.xnova.digicerto.ui.main.MainActivity
 import com.xnova.digicerto.ui.settings.application.ApplicationSettingsActivity
@@ -27,13 +26,12 @@ import com.xnova.digicerto.ui.settings.printer.PrinterSettingsActivity
 import com.xnova.digicerto.ui.settings.travel.TravelSettingsActivity
 import com.xnova.digicerto.ui.settings.ws.WSSettingsActivity
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment() {
 
     private val mLoginFragment = LoginFragment()
     private val mMenuSettingsAdapter = MenuSettingsAdapter()
     private var mBinding: FragmentSettingsBinding? = null
     private lateinit var mViewModel: SettingsViewModel
-    private lateinit var mAlertFactory: AlertFactory
 
     private fun binding() = mBinding!!
 
@@ -41,18 +39,17 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-
-        mAlertFactory = AlertFactory(requireContext())
+        viewRoot = binding().root
 
         listeners()
         observers()
         adapters()
         //login()
 
-        return binding().root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onResume() {
@@ -72,12 +69,15 @@ class SettingsFragment : Fragment() {
     }
 
     private fun listeners() {
-        mLoginFragment.onAttach(object : LoginListener {
+        mLoginFragment.setListener(object : LoginListener {
             override fun authenticate(authenticated: Boolean) {
-                if (authenticated) {
-                    showChooseTypeOperationAlert()
-                } else {
+                if (!authenticated) {
                     homePageChange()
+                    return
+                }
+
+                if (mViewModel.settings.necessaryChooseTypeOperation) {
+                    showChooseTypeOperationAlert()
                 }
             }
         })
@@ -126,20 +126,22 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showChooseTypeOperationAlert() {
-        mAlertFactory.getInstance(R.string.text_necessary_action,
-            R.string.msg_necessary_choosen_operation_type,
-            textIdPositive = R.string.text_web_service,
-            actionPositive = { dialog, _ ->
-                dialog.dismiss()
-                mViewModel.setOperationType(OperationType.WebService)
-                mViewModel.save()
-            },
-            textIdNegative = R.string.text_FTP,
-            actionNegative = { dialog, _ ->
-                dialog.dismiss()
-                mViewModel.setOperationType(OperationType.FTP)
-                mViewModel.save()
-            }).show()
+        if (mViewModel.settings.necessaryChooseTypeOperation) {
+            alertFactory.getInstance(R.string.text_necessary_action,
+                R.string.msg_necessary_choosen_operation_type,
+                textIdPositive = R.string.text_web_service,
+                actionPositive = { dialog, _ ->
+                    dialog.dismiss()
+                    mViewModel.setOperationType(OperationType.WebService)
+                    mViewModel.save()
+                },
+                textIdNegative = R.string.text_FTP,
+                actionNegative = { dialog, _ ->
+                    dialog.dismiss()
+                    mViewModel.setOperationType(OperationType.FTP)
+                    mViewModel.save()
+                }).show()
+        }
     }
 
     private fun homePageChange() {

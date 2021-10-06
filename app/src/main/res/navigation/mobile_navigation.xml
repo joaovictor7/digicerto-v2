@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
+        android:id="@+id/nav_register"
+        android:name="com.xnova.digicerto.ui.register.RegisterFragment"
+        android:label="@string/menu_registers"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.xnova.digicerto.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"

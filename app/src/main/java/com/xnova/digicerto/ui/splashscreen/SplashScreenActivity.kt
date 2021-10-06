@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.xnova.digicerto.databinding.ActivitySplashScreenBinding
+import com.xnova.digicerto.ui.BaseActivity
 import com.xnova.digicerto.ui.main.MainActivity
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : BaseActivity() {
 
     companion object {
         private const val DELAY_MILLISECONDS = 1000L

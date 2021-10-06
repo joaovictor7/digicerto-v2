@@ -4,8 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
 import com.xnova.digicerto.models.entities.Producer
-import com.xnova.digicerto.models.entities.RouteProducer
 import com.xnova.digicerto.models.entities.Route
+import com.xnova.digicerto.models.entities.RouteProducer
 
 data class RouteWithProducers(
     @Embedded val route: Route,

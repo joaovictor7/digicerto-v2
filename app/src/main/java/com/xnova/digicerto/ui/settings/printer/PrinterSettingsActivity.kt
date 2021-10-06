@@ -6,15 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.CompoundButton
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityPrinterSettingsBinding
 import com.xnova.digicerto.models.BluetoothDevice
@@ -23,19 +18,17 @@ import com.xnova.digicerto.models.entities.settings.PrinterDataSettings
 import com.xnova.digicerto.models.entities.settings.PrinterSettings
 import com.xnova.digicerto.services.adapters.BluetoothDevicesAdapter
 import com.xnova.digicerto.services.enums.AlertType
-import com.xnova.digicerto.services.enums.settings.printer.LayoutPrinter
 import com.xnova.digicerto.services.enums.settings.printer.Dupplicate
-import com.xnova.digicerto.services.factories.AlertFactory
-import com.xnova.digicerto.services.factories.ProgressBarFactory
+import com.xnova.digicerto.services.enums.settings.printer.LayoutPrinter
 import com.xnova.digicerto.services.factories.inputs.OnItemSelectedFactory
+import com.xnova.digicerto.ui.BaseActivity
 
-class PrinterSettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
+class PrinterSettingsActivity : BaseActivity(R.string.text_printer),
+    CompoundButton.OnCheckedChangeListener {
 
     private lateinit var mBinding: ActivityPrinterSettingsBinding
     private lateinit var mViewModel: PrinterSettingsViewModel
     private lateinit var mBluetoohDeviceAdapter: BluetoothDevicesAdapter
-    private lateinit var mAlertFactory: AlertFactory
-    private var mProgressBar: AlertDialog? = null
 
     private val mBluetoothResultNone =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
@@ -58,11 +51,9 @@ class PrinterSettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedCha
 
         mViewModel = ViewModelProvider(this).get(PrinterSettingsViewModel::class.java)
         mBinding = ActivityPrinterSettingsBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        mAlertFactory = AlertFactory(this)
-
-        actionBar()
         listeners()
         observers()
         adapters()
@@ -108,11 +99,6 @@ class PrinterSettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedCha
                 }
             }
         }
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_printer)
     }
 
     private fun listeners() {
@@ -240,53 +226,19 @@ class PrinterSettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedCha
         return valid
     }
 
-    private fun showAlert(alertType: AlertType, titleId: Int, messageId: Int) {
-        mAlertFactory.getInstance(alertType, titleId, messageId,
-            neutralButton = { dialog, _ ->
+    private fun showPrinterTestAlert() {
+        alertFactory.getInstance(R.string.text_settings_saved, R.string.msg_test_printer,
+            actionPositive = { dialog, _ ->
+                dialog.dismiss()
+                if (mViewModel.bluetoothIsEnabled) {
+                    mViewModel.printerTest()
+                } else {
+                    requestEnableBluetooth(mBluetoothResultTest)
+                }
+            },
+            actionNegative = { dialog, _ ->
                 dialog.dismiss()
             }).show()
-    }
-
-    private fun showSnackBar(messageId: Int) {
-        Snackbar.make(mBinding.root, messageId, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun showMandatoryMsg(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    private fun showHelp(textView: TextView, messageId: Int) {
-        textView.text = getString(messageId)
-        textView.visibility = View.VISIBLE
-    }
-
-    private fun hideHelp(textView: TextView) {
-        textView.visibility = View.GONE
-    }
-
-    private fun showProgressBar(messageId: Int) {
-        mProgressBar = ProgressBarFactory(this).getInstance(messageId)
-        mProgressBar!!.show()
-    }
-
-    private fun hideProgressBar() {
-        mProgressBar?.dismiss()
-    }
-
-    private fun showPrinterTestAlert() {
-        AlertFactory(this)
-            .getInstance(R.string.text_settings_saved, R.string.msg_test_printer,
-                actionPositive = { dialog, _ ->
-                    dialog.dismiss()
-                    if (mViewModel.bluetoothIsEnabled) {
-                        mViewModel.printerTest()
-                    } else {
-                        requestEnableBluetooth(mBluetoothResultTest)
-                    }
-                },
-                actionNegative = { dialog, _ ->
-                    dialog.dismiss()
-                }).show()
     }
 
     private fun requestEnableBluetooth(intent: ActivityResultLauncher<Intent>) {

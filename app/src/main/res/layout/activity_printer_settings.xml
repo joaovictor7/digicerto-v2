@@ -27,8 +27,8 @@
                     android:text="@string/text_user_printer" />
 
                 <TextView
-                    android:layout_marginTop="10dp"
                     style="@style/Theme.DIGIcerto.LabelSettings"
+                    android:layout_marginTop="10dp"
                     android:text="@string/text_printer_used" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -42,10 +42,7 @@
 
                 <TextView
                     android:id="@+id/text_printer_help"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
+                    style="@style/Theme.DIGIcerto.HelpLabelSettings" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

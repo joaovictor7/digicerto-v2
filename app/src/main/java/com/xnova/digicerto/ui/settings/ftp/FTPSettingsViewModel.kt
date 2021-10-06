@@ -1,8 +1,6 @@
 package com.xnova.digicerto.ui.settings.ftp
 
 import android.app.Application
-import android.net.ConnectivityManager
-import android.net.Network
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

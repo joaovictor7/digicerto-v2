@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.xnova.digicerto.models.entities.RouteProducer
 import com.xnova.digicerto.models.entities.Route
+import com.xnova.digicerto.models.entities.RouteProducer
 
 @Dao
 interface RouteDao {

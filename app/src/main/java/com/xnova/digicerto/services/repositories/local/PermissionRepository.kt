@@ -4,9 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
-import com.xnova.digicerto.R
-import com.xnova.digicerto.services.enums.AlertType
-import com.xnova.digicerto.services.factories.AlertFactory
 
 class PermissionRepository(context: Context) {
 

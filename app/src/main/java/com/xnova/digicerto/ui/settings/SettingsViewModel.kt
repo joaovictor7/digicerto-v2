@@ -42,15 +42,16 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     private val mApplication = application
     private val mSettingsRepository = SettingsRepository(application)
-    private var mSettings = mSettingsRepository.get()
-
     private val mRefreshScreen = MutableLiveData<Boolean>()
     val refreshScreen: LiveData<Boolean> = mRefreshScreen
+
+    var settings = mSettingsRepository.get()
+        private set
 
     fun getMenuSettings(): List<MenuSettings> {
         val menuList = mMenuSettings.toMutableList()
 
-        if (mSettings.operationType == OperationType.FTP) {
+        if (settings.operationType == OperationType.FTP) {
             menuList.add(
                 MenuSettings(
                     SettingsConstants.MENU.FTP_ID,
@@ -58,7 +59,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                     mApplication.getString(R.string.msg_description_FTP)
                 )
             )
-        } else if (mSettings.operationType == OperationType.WebService) {
+        } else if (settings.operationType == OperationType.WebService) {
             menuList.add(
                 MenuSettings(
                     SettingsConstants.MENU.WS_ID,
@@ -72,20 +73,16 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun setOperationType(operationType: OperationType) {
-        mSettings.operationType = operationType
-    }
-
-    fun necessaryChooseTypeOperation(): Boolean {
-        return mSettings.necessaryChooseTypeOperation
+        settings.operationType = operationType
     }
 
     fun save() {
-        mSettingsRepository.update(mSettings)
+        mSettingsRepository.update(settings)
         refreshEntities()
     }
 
     fun refreshEntities() {
-        mSettings = mSettingsRepository.get()
+        settings = mSettingsRepository.get()
         mRefreshScreen.value = true
     }
 }

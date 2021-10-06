@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.register.RegisterFragment">
+
+    <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/text_last_sync"
+                style="@style/Theme.DIGIcerto.LabelSettings"
+                android:text="@string/text_last_sync"
+                app:layout_constraintBottom_toBottomOf="@id/barrier1"
+                app:layout_constraintEnd_toStartOf="@id/text_last_sync_value"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_last_sync_value"
+                style="@style/Theme.DIGIcerto.LabelSettings"
+                android:gravity="end"
+                app:layout_constraintBottom_toBottomOf="@id/text_last_sync"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_last_sync"
+                app:layout_constraintTop_toTopOf="@id/text_last_sync" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="text_sync_help" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_sync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/text_sync"
+                app:layout_constraintBottom_toTopOf="@id/text_sync_help"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/barrier1" />
+
+            <TextView
+                android:id="@+id/text_sync_help"
+                style="@style/Theme.DIGIcerto.HelpLabelSettings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_sync" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

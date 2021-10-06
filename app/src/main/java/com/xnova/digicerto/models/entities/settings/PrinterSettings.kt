@@ -2,8 +2,8 @@ package com.xnova.digicerto.models.entities.settings
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
-import com.xnova.digicerto.services.enums.settings.printer.LayoutPrinter
 import com.xnova.digicerto.services.enums.settings.printer.Dupplicate
+import com.xnova.digicerto.services.enums.settings.printer.LayoutPrinter
 
 data class PrinterSettings(
     @ColumnInfo(name = "UsePrinter") val usePrinter: Boolean,

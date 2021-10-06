@@ -3,15 +3,14 @@ package com.xnova.digicerto.ui.settings.travel
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityTravelSettingsBinding
 import com.xnova.digicerto.models.entities.settings.TravelSettings
 import com.xnova.digicerto.services.enums.settings.travel.*
+import com.xnova.digicerto.ui.BaseActivity
 
-class TravelSettingsActivity : AppCompatActivity() {
+class TravelSettingsActivity : BaseActivity(R.string.text_travel) {
 
     private lateinit var mBinding: ActivityTravelSettingsBinding
     private lateinit var mViewModel: TravelSettingsViewModel
@@ -21,9 +20,9 @@ class TravelSettingsActivity : AppCompatActivity() {
 
         mBinding = ActivityTravelSettingsBinding.inflate(layoutInflater)
         mViewModel = ViewModelProvider(this).get(TravelSettingsViewModel::class.java)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        actionBar()
         observers()
         setComponents()
     }
@@ -42,11 +41,6 @@ class TravelSettingsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_travel)
     }
 
     private fun observers() {
@@ -137,9 +131,5 @@ class TravelSettingsActivity : AppCompatActivity() {
             odometerRegister
         )
         mViewModel.travelSettings = travelSettings
-    }
-
-    private fun showSnackBar(messageId: Int) {
-        Snackbar.make(mBinding.root, messageId, Snackbar.LENGTH_LONG).show()
     }
 }

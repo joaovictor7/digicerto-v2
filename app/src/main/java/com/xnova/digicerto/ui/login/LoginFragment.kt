@@ -22,7 +22,7 @@ import com.xnova.digicerto.services.listeners.LoginListener
 class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     companion object {
-        const val TAG = "BottomSheetTag"
+        const val TAG = "bottom_sheet_tag"
     }
 
     private var mBinding: FragmentLoginBinding? = null
@@ -44,7 +44,7 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
         listeners()
         observers()
-        necessaryFirstRegister()
+        registerCheck()
 
         return binding().root
     }
@@ -81,7 +81,7 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
         }
     }
 
-    fun onAttach(loginListener: LoginListener) {
+    fun setListener(loginListener: LoginListener) {
         mLoginListener = loginListener
     }
 
@@ -123,14 +123,13 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
         return valid
     }
 
-
     private fun setExpandedState(dialog: Dialog) {
         if (dialog is BottomSheetDialog) {
             dialog.behavior.state = STATE_EXPANDED
         }
     }
 
-    private fun necessaryFirstRegister() {
+    private fun registerCheck() {
         if (!mViewModel.loginAvailable()) {
             showAlert(R.string.text_access_denied, R.string.msg_first_register)
             dismiss()

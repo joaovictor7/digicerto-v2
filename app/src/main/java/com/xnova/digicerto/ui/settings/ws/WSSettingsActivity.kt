@@ -3,36 +3,27 @@ package com.xnova.digicerto.ui.settings.ws
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityWsSettingsBinding
 import com.xnova.digicerto.models.entities.settings.WSSettings
-import com.xnova.digicerto.services.enums.AlertType
-import com.xnova.digicerto.services.factories.AlertFactory
 import com.xnova.digicerto.services.factories.inputs.OnClickFactory
-import com.xnova.digicerto.services.factories.ProgressBarFactory
 import com.xnova.digicerto.services.factories.inputs.TextWatcherFactory
+import com.xnova.digicerto.ui.BaseActivity
 
-class WSSettingsActivity : AppCompatActivity() {
+class WSSettingsActivity : BaseActivity(R.string.text_web_service) {
 
     private lateinit var mBinding: ActivityWsSettingsBinding
     private lateinit var mViewModel: WSSettingsViewModel
-    private lateinit var mAlertFactory: AlertFactory
-    private var mProgressBar: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mViewModel = ViewModelProvider(this).get(WSSettingsViewModel::class.java)
         mBinding = ActivityWsSettingsBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        mAlertFactory = AlertFactory(this)
-
-        actionBar()
         listeners()
         observers()
         setComponents()
@@ -55,11 +46,6 @@ class WSSettingsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_web_service)
     }
 
     private fun listeners() {
@@ -136,24 +122,8 @@ class WSSettingsActivity : AppCompatActivity() {
         return valid
     }
 
-    private fun showProgressBar(messageId: Int) {
-        mProgressBar = ProgressBarFactory(this).getInstance(messageId)
-        mProgressBar!!.show()
-    }
-
-    private fun hideProgressBar() {
-        mProgressBar?.dismiss()
-    }
-
-    private fun showAlert(alertType: AlertType, titleId: Int, messageId: Int) {
-        mAlertFactory.getInstance(alertType, titleId, messageId,
-            neutralButton = { dialog, _ ->
-                dialog.dismiss()
-            }).show()
-    }
-
     private fun showWSTestAlert() {
-        mAlertFactory.getInstance(R.string.text_settings_saved, R.string.msg_test_ws,
+        alertFactory.getInstance(R.string.text_settings_saved, R.string.msg_test_ws,
             actionPositive = { dialog, _ ->
                 dialog.dismiss()
                 mViewModel.testWS()

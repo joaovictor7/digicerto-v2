@@ -3,9 +3,7 @@ package com.xnova.digicerto.ui.settings.collect
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.ActivityCollectSettingsBinding
 import com.xnova.digicerto.models.entities.settings.CollectSettings
@@ -13,8 +11,9 @@ import com.xnova.digicerto.services.enums.settings.collect.CollectiveTankCollect
 import com.xnova.digicerto.services.enums.settings.collect.RegisterSample
 import com.xnova.digicerto.services.factories.inputs.OnClickFactory
 import com.xnova.digicerto.services.factories.inputs.TextWatcherFactory
+import com.xnova.digicerto.ui.BaseActivity
 
-class CollectSettingsActivity : AppCompatActivity() {
+class CollectSettingsActivity : BaseActivity(R.string.text_collect) {
 
     private lateinit var mBinding: ActivityCollectSettingsBinding
     private lateinit var mViewModel: CollectSettingsViewModel
@@ -24,9 +23,9 @@ class CollectSettingsActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProvider(this).get(CollectSettingsViewModel::class.java)
         mBinding = ActivityCollectSettingsBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        viewRoot = mBinding.root
+        setContentView(viewRoot)
 
-        actionBar()
         listeners()
         observers()
         setComponents()
@@ -48,11 +47,6 @@ class CollectSettingsActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun actionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.text_collect)
     }
 
     private fun listeners() {
@@ -123,10 +117,6 @@ class CollectSettingsActivity : AppCompatActivity() {
             productionTolerancePercentage
         )
         mViewModel.collectSettings = collectSettings
-    }
-
-    private fun showSnackBar(messageId: Int) {
-        Snackbar.make(mBinding.root, messageId, Snackbar.LENGTH_LONG).show()
     }
 
     private fun componentsValidate(): Boolean {
