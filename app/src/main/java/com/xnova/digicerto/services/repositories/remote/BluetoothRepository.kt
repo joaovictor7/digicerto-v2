@@ -1,24 +1,26 @@
 package com.xnova.digicerto.services.repositories.remote
 
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
+import android.content.Context
 import io.reactivex.rxjava3.core.Completable
 import java.util.*
 
-class BluetoothRepository {
+class BluetoothRepository(context: Context) {
 
     companion object {
         private const val MILLISECONDS_DELAY = 5000L
         private val mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     }
 
-    private val mBluetoothAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    private val mContext = context
+    private val mBluetoothManager = mContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
     val pairedDevices: MutableSet<BluetoothDevice>
-        get() = mBluetoothAdapter.bondedDevices
+        get() = mBluetoothManager.adapter.bondedDevices
 
     val isEnabled: Boolean
-        get() = mBluetoothAdapter.isEnabled
+        get() = mBluetoothManager.adapter.isEnabled
 
     fun printTextBluetoothPrinter(printer: BluetoothDevice, texts: List<String>): Completable {
         return Completable.create {

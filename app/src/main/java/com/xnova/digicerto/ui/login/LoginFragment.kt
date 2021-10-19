@@ -28,7 +28,6 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private var mBinding: FragmentLoginBinding? = null
     private lateinit var mViewModel: LoginViewModel
     private lateinit var mLoginListener: LoginListener
-    private lateinit var mAlertFactory: AlertFactory
 
     private fun binding() = mBinding!!
 
@@ -39,8 +38,6 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
     ): View {
         mViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         mBinding = FragmentLoginBinding.inflate(inflater, container, false)
-
-        mAlertFactory = AlertFactory(requireContext())
 
         listeners()
         observers()
@@ -137,10 +134,14 @@ class LoginFragment : BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     private fun showAlert(titleId: Int, messageId: Int) {
-        mAlertFactory.getInstance(AlertType.Info, titleId, messageId,
-            neutralButton = { dialog, _ ->
+        AlertFactory(requireContext())
+            .setType(AlertType.Info)
+            .setTitle(titleId)
+            .setMessage(messageId)
+            .setNeutralButton { dialog, _ ->
                 dialog.dismiss()
                 mLoginListener.authenticate(false)
-            }).show()
+            }
+            .show()
     }
 }

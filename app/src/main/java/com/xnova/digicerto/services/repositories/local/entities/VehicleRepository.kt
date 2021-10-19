@@ -3,6 +3,7 @@ package com.xnova.digicerto.services.repositories.local.entities
 import android.content.Context
 import com.xnova.digicerto.models.entities.Vehicle
 import com.xnova.digicerto.models.entities.VehicleCompartment
+import com.xnova.digicerto.models.entities.relations.VehicleWithCompartments
 import com.xnova.digicerto.services.data.DatabaseService
 
 class VehicleRepository(context: Context) {
@@ -11,27 +12,39 @@ class VehicleRepository(context: Context) {
 
     fun addOrUpdate(vehicle: Vehicle) {
         val v = get(vehicle.code)
-        if (v == null)
-            mVehicleDao.add(vehicle) else mVehicleDao.update(v)
+        if (v == null) {
+            mVehicleDao.add(vehicle)
+        } else {
+            mVehicleDao.update(vehicle)
+        }
     }
 
     fun addOrUpdate(vehicleCompartment: VehicleCompartment) {
         val vc = getCompartment(vehicleCompartment.vehicleCode, vehicleCompartment.compartment)
-        if (vc == null)
-            mVehicleDao.addCompartment(vehicleCompartment) else mVehicleDao.updateCompartment(
-            vehicleCompartment
-        )
+        if (vc == null) {
+            mVehicleDao.addCompartment(vehicleCompartment)
+        } else {
+            mVehicleDao.updateCompartment(vehicleCompartment)
+        }
     }
 
-    fun get(id: Int): Vehicle? {
-        return mVehicleDao.get(id)
+    fun get(code: Int): Vehicle? {
+        return mVehicleDao.get(code)
     }
 
     fun inactiveAll() {
         mVehicleDao.inactiveAll()
     }
 
+    fun getTotalActives(): Int {
+        return mVehicleDao.getTotalActives()
+    }
+
     private fun getCompartment(vehicleCode: Int, compartment: Int): VehicleCompartment? {
         return mVehicleDao.getCompartment(vehicleCode, compartment)
+    }
+
+    fun getAllActive(): List<VehicleWithCompartments> {
+        return mVehicleDao.getAllActive()
     }
 }

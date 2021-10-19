@@ -8,5 +8,13 @@ class StringUtil private constructor() {
         fun emailValid(email: String): Boolean {
             return email.matches(EMAIL_PATTERN.toRegex())
         }
+
+        fun shortenString(string: String, size: Int, final: String = "..."): String {
+            return if (string.length > size) {
+                string.substring(0, size) + final
+            } else {
+                string
+            }
+        }
     }
 }

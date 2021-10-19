@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.register.RegisterFragment">
 
     <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
@@ -15,8 +16,8 @@
 
             <TextView
                 android:id="@+id/text_last_sync"
-                style="@style/Theme.DIGIcerto.LabelSettings"
-                android:text="@string/text_last_sync"
+                style="@style/Theme.DIGIcerto.Label"
+                android:text="@string/text_last_sync_colon"
                 app:layout_constraintBottom_toBottomOf="@id/barrier1"
                 app:layout_constraintEnd_toStartOf="@id/text_last_sync_value"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -25,8 +26,9 @@
 
             <TextView
                 android:id="@+id/text_last_sync_value"
-                style="@style/Theme.DIGIcerto.LabelSettings"
+                style="@style/Theme.DIGIcerto.Label"
                 android:gravity="end"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/text_last_sync"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/text_last_sync"
@@ -36,8 +38,8 @@
                 android:id="@+id/barrier1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:barrierDirection="top"
-                app:constraint_referenced_ids="text_sync_help" />
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="text_last_sync,text_last_sync_value" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_sync"
@@ -52,12 +54,34 @@
 
             <TextView
                 android:id="@+id/text_sync_help"
-                style="@style/Theme.DIGIcerto.HelpLabelSettings"
+                style="@style/Theme.DIGIcerto.HelpLabel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_sync" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-</FrameLayout>
+    <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_registers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                style="@style/Theme.DIGIcerto.HelpLabel"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/msg_click_view_register"
+                android:visibility="visible" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

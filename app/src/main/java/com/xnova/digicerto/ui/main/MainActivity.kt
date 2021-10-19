@@ -1,7 +1,10 @@
 package com.xnova.digicerto.ui.main
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -22,17 +25,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        installSplashScreen()
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setSupportActionBar(mBinding.appBarMain.toolbar)
         setNavigationMenu()
 
+        listeners()
+        startApp()
+
         /*binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
     }
+
 
     /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -53,9 +61,27 @@ class MainActivity : AppCompatActivity() {
         }
     }*/
 
-    fun changeFragment(fragment: Int){
+    fun changeFragment(fragment: Int) {
         findNavController(R.id.nav_host_fragment_content_main)
             .navigate(fragment)
+    }
+
+    private fun listeners() {
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                return if (mViewModel.pageIsLoaded) {
+                    content.viewTreeObserver.removeOnPreDrawListener(this)
+                    true
+                } else {
+                    false
+                }
+            }
+        })
+    }
+
+    private fun startApp() {
+        mViewModel.start()
     }
 
     private fun setNavigationMenu() {
@@ -64,7 +90,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
         mAppBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_settings, R.id.nav_slideshow), drawerLayout
+            setOf(R.id.nav_home, R.id.nav_settings, R.id.nav_register, R.id.nav_slideshow),
+            drawerLayout
         )
         setupActionBarWithNavController(navController, mAppBarConfiguration)
         navView.setupWithNavController(navController)

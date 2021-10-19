@@ -23,7 +23,7 @@ data class FTPSettings(
         this.password = Base64.encodeBase64String(password.toByteArray()).toString()
     }
 
-    fun setFormattedFolder(folder: String) {
+    fun setUnformattedFolder(folder: String) {
         var folderFormatted = folder.replace("\\", "/")
 
         if (!folderFormatted.startsWith("/")) {

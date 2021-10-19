@@ -2,54 +2,76 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xnova.digicerto">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
 
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_digicerto"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_digicerto_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DIGIcerto">
         <activity
-            android:name=".ui.settings.printer.PrinterSettingsActivity"
-            android:exported="true" />
+            android:name=".ui.register.route.RegisterRouteActivity"
+            android:label="@string/text_routes"
+            android:exported="false" />
         <activity
-            android:name=".ui.settings.file.FileSettingsActivity"
-            android:exported="true" />
+            android:name=".ui.register.vehicle.RegisterVehicleActivity"
+            android:exported="false"
+            android:label="@string/text_vehicles" />
         <activity
-            android:name=".ui.settings.ws.WSSettingsActivity"
+            android:name=".ui.register.occurrence.RegisterOccurrenceActivity"
+            android:exported="false"
+            android:label="@string/text_occurrences" />
+        <activity
+            android:name=".ui.register.driver.RegisterDriverActivity"
+            android:exported="false"
+            android:label="@string/text_drivers" />
+        <activity
+            android:name=".ui.register.producer.RegisterProducerActivity"
+            android:exported="false"
+            android:label="@string/text_producers" />
+        <activity
+            android:name=".ui.settings.printer.SettingsPrinterActivity"
             android:exported="true"
+            android:label="@string/text_printer" />
+        <activity
+            android:name=".ui.settings.file.SettingsFileActivity"
+            android:exported="true"
+            android:label="@string/text_file" />
+        <activity
+            android:name=".ui.settings.ws.SettingsWSActivity"
+            android:exported="true"
+            android:label="@string/text_web_service" />
+        <activity
+            android:name=".ui.settings.ftp.SettingsFTPActivity"
+            android:exported="true"
+            android:label="@string/text_FTP" />
+        <activity
+            android:name=".ui.settings.collect.SettingsCollectActivity"
+            android:exported="true"
+            android:label="@string/text_collect" />
+        <activity
+            android:name=".ui.settings.application.SettingsApplicationActivity"
+            android:exported="true"
+            android:label="@string/text_application"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.settings.ftp.FTPSettingsActivity"
+            android:name=".ui.settings.travel.SettingsTravelActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.settings.collect.CollectSettingsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.settings.application.ApplicationSettingsActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.settings.travel.TravelSettingsActivity"
-            android:exported="true" />
+            android:label="@string/text_travel" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.DIGIcerto.NoActionBar" />
-        <activity
-            android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.DIGIcerto.NoActionBar">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.DIGIcerto.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

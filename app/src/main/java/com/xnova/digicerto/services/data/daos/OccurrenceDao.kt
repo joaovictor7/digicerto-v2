@@ -19,4 +19,10 @@ interface OccurrenceDao {
 
     @Query("update Occurrence set Active = 0")
     fun inactiveAll()
+
+    @Query("select count(Code) from Occurrence where Active = 1")
+    fun getTotalActive(): Int
+
+    @Query("select * from Occurrence where Active = 1")
+    fun getAllActive(): List<Occurrence>
 }

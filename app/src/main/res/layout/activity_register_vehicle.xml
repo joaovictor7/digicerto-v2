@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.register.vehicle.RegisterVehicleActivity">
+
+    <com.google.android.material.card.MaterialCardView style="@style/Theme.DIGIcerto.CardView">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Theme.DIGIcerto.TextInputFilled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_code_plate_vehicle"
+                app:endIconMode="clear_text"
+                app:errorEnabled="false"
+                app:startIconDrawable="@drawable/ic_baseline_find_in_page_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_find_vehicle"
+                    style="@style/Theme.DIGIcerto.TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        style="@style/Theme.DIGIcerto.ViewSeparator"
+        android:layout_marginBottom="0dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_vehicles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -97,7 +97,7 @@ class SyncFTPService(context: Context) : SyncService(context) {
     }
 
     private fun readAllLinesFile(fileDir: String) {
-        val allLines = File(fileDir).readLines()
+        val allLines = File(fileDir).readLines(Charsets.ISO_8859_1)
         allLines.forEach {
             val line = it.split(SyncConstants.FTP.SPLIT_DELIMITER)
             lineValidateAndEntitieBuilder(line)

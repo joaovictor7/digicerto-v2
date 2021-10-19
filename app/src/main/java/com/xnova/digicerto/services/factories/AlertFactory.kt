@@ -2,21 +2,25 @@ package com.xnova.digicerto.services.factories
 
 import android.content.Context
 import android.content.DialogInterface
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.xnova.digicerto.R
 import com.xnova.digicerto.services.enums.AlertType
 
 class AlertFactory(context: Context) {
 
-    private val mContext = context
+    companion object {
+        private val mNeutralButton: (dialog: DialogInterface, id: Int) -> Unit =
+            { dialog, _ -> dialog.dismiss() }
 
-    fun getInstance(
-        type: AlertType,
-        titleId: Int,
-        messageId: Int,
-        neutralButton: (dialog: DialogInterface, id: Int) -> Unit
-    ): AlertDialog {
+        private val mNegativeButton: (dialog: DialogInterface, id: Int) -> Unit =
+            { dialog, _ -> dialog.dismiss() }
+
+        private val mCancelable: () -> Unit = {}
+    }
+
+    private var mAlertBuilder = MaterialAlertDialogBuilder(context)
+
+    fun setType(type: AlertType): AlertFactory {
         val iconId = when (type) {
             AlertType.Error -> R.drawable.ic_baseline_error_24
             AlertType.Info -> R.drawable.ic_baseline_info_24
@@ -25,36 +29,54 @@ class AlertFactory(context: Context) {
             AlertType.Success -> R.drawable.ic_baseline_check_circle_24
         }
 
-        val builder = MaterialAlertDialogBuilder(mContext)
-        builder.setMessage(messageId)
-            .setIcon(iconId)
-            .setTitle(titleId)
-            .setNeutralButton(R.string.text_ok) { dialog, id ->
-                neutralButton(dialog, id)
-            }
-
-        return builder.create()
+        mAlertBuilder = mAlertBuilder.setIcon(iconId)
+        return this
     }
 
-    fun getInstance(
-        titleId: Int,
-        messageId: Int,
-        actionPositive: (dialog: DialogInterface, any: Int) -> Unit,
-        actionNegative: (dialog: DialogInterface, any: Int) -> Unit,
-        textIdPositive: Int = R.string.text_yes,
-        textIdNegative: Int = R.string.text_no
-    ): AlertDialog {
-        val builder = MaterialAlertDialogBuilder(mContext)
-        builder.setCancelable(false)
-            .setTitle(titleId)
-            .setMessage(messageId)
-            .setPositiveButton(textIdPositive) { dialog, id ->
-                actionPositive(dialog, id)
-            }
-            .setNegativeButton(textIdNegative) { dialog, id ->
-                actionNegative(dialog, id)
-            }
+    fun setTitle(titleId: Int): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setTitle(titleId)
+        return this
+    }
 
-        return builder.create()
+    fun setMessage(messageId: Int): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setMessage(messageId)
+        return this
+    }
+
+    fun setCancelable(cancel: () -> Unit = mCancelable): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setOnCancelListener { cancel() }
+        return this
+    }
+
+    fun setCancelable(cancel: Boolean): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setCancelable(cancel)
+        return this
+    }
+
+    fun setNeutralButton(
+        neutralButton: (dialog: DialogInterface, id: Int) -> Unit = mNeutralButton
+    ): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setNeutralButton(R.string.text_ok, neutralButton)
+        return this
+    }
+
+    fun setPositiveButton(
+        textIdPositive: Int = R.string.text_yes,
+        positiveButton: (dialog: DialogInterface, any: Int) -> Unit
+    ): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setPositiveButton(textIdPositive, positiveButton)
+        return this
+    }
+
+    fun setNegativeButton(
+        textIdNegative: Int = R.string.text_no,
+        negativeButton: (dialog: DialogInterface, any: Int) -> Unit = mNegativeButton
+    ): AlertFactory {
+        mAlertBuilder = mAlertBuilder.setNegativeButton(textIdNegative, negativeButton)
+        return this
+    }
+
+    fun show() {
+        mAlertBuilder.create().show()
     }
 }

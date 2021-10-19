@@ -15,11 +15,11 @@ android {
         versionCode 1
         versionName "1.0"
 
-        kapt {
+        /*kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas")
             }
-        }
+        }*/
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -49,45 +49,44 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
 
     // Room
-    def room = "2.3.0"
-    implementation "androidx.room:room-runtime:$room"
-    kapt "androidx.room:room-compiler:$room"
+    implementation 'androidx.room:room-runtime:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
 
     // Commons Apache
-    def commons = "3.8.0"
-    def codec = "1.15"
-    def lang = "3.12.0"
-    implementation "commons-net:commons-net:$commons"
-    implementation "commons-codec:commons-codec:$codec"
-    implementation "org.apache.commons:commons-lang3:$lang"
+    implementation 'commons-net:commons-net:3.8.0'
+    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     // RX Java
-    def rxjava = "3.1.1"
-    def rxandroid = "3.0.0"
-    implementation "io.reactivex.rxjava3:rxjava:$rxjava"
-    implementation "io.reactivex.rxjava3:rxandroid:$rxandroid"
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.2'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     // Pretty Time
-    def prettytime = "5.0.2.Final"
-    implementation "org.ocpsoft.prettytime:prettytime:$prettytime"
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.2.Final'
 
-    // Local libs
-    //implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // AndroidX
+    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    // Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Local libs
+    //implementation fileTree(include: ['*.jar'], dir: 'libs')
 }

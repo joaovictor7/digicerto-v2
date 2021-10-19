@@ -37,16 +37,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Border Text -->
-    <style name="Theme.DIGIcerto.BorderText">
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
-        <item name="android:shadowColor">#FFFFFF</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">0</item>
-        <item name="android:shadowRadius">7</item>
-    </style>
-
     <!-- TextInput/TextInputEditText -->
     <style name="Theme.DIGIcerto.TextInputOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextColor">@color/brown_700</item>
@@ -60,8 +50,13 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
-    <!-- TextView Label Settings -->
-    <style name="Theme.DIGIcerto.LabelSettings" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DIGIcerto.TextInputEditText">
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:inputType">textNoSuggestions</item>
+    </style>
+
+    <!-- TextView Label -->
+    <style name="Theme.DIGIcerto.Label" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">18sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -76,18 +71,23 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="Theme.DIGIcerto.HelpLabelSettings" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DIGIcerto.HelpLabel" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">14sp</item>
-        <item name="android:visibility">gone</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Theme.DIGIcerto.NormalText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <!-- View Separator -->
     <style name="Theme.DIGIcerto.ViewSeparator">
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
         <item name="android:layout_marginStart">8dp</item>
@@ -106,8 +106,18 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">8dp</item>
         <item name="android:checkable">true</item>
-        <item name="cornerRadius">@dimen/radius_default</item>
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="cornerRadius">@dimen/radius</item>
         <item name="cardElevation">6dp</item>
+    </style>
+
+    <!-- Splash Screen -->
+    <style name="Theme.DIGIcerto.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/brown_700</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_digicerto_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/brown_200</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
+        <item name="postSplashScreenTheme">@style/Theme.DIGIcerto.NoActionBar</item>
     </style>
 
 </resources>

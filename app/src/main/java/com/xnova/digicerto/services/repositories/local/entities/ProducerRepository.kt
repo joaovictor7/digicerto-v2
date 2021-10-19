@@ -9,16 +9,27 @@ class ProducerRepository(context: Context) {
     private val mProducerDao = DatabaseService.getDatabase(context).producerDao()
 
     fun addOrUpdate(producer: Producer) {
-        val p = get(producer.code)
-        if (p == null)
-            mProducerDao.add(producer) else mProducerDao.update(producer)
+        val p = get(producer.code, producer.farmCode)
+        if (p == null) {
+            mProducerDao.add(producer)
+        } else {
+            mProducerDao.update(producer)
+        }
     }
 
-    fun get(id: Int): Producer? {
-        return mProducerDao.get(id)
+    fun get(code: Int, farmCode: Int): Producer? {
+        return mProducerDao.get(code, farmCode)
     }
 
     fun inactiveAll() {
         mProducerDao.inactiveAll()
+    }
+
+    fun getTotalActive(): Int {
+        return mProducerDao.getTotalActive()
+    }
+
+    fun getAllActive(): List<Producer> {
+        return mProducerDao.getAllActive()
     }
 }

@@ -10,8 +10,11 @@ class CredentialRepository(context: Context) {
 
     fun addOrUpdate(credential: Credential) {
         val c = get()
-        if (c == null)
-            mCredentialDao.add(credential) else mCredentialDao.update(credential)
+        if (c == null) {
+            mCredentialDao.add(credential)
+        } else {
+            mCredentialDao.update(credential)
+        }
     }
 
     fun get(): Credential? {

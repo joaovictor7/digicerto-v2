@@ -1,6 +1,5 @@
 package com.xnova.digicerto.ui.settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.xnova.digicerto.R
 import com.xnova.digicerto.databinding.FragmentSettingsBinding
 import com.xnova.digicerto.models.MenuSettings
-import com.xnova.digicerto.services.adapters.MenuSettingsAdapter
+import com.xnova.digicerto.ui.adapters.MenuSettingsAdapter
 import com.xnova.digicerto.services.constants.SettingsConstants
 import com.xnova.digicerto.services.enums.settings.OperationType
+import com.xnova.digicerto.services.factories.AlertFactory
 import com.xnova.digicerto.services.listeners.LoginListener
 import com.xnova.digicerto.services.listeners.MenuSettingsListener
 import com.xnova.digicerto.ui.BaseFragment
 import com.xnova.digicerto.ui.login.LoginFragment
 import com.xnova.digicerto.ui.main.MainActivity
-import com.xnova.digicerto.ui.settings.application.ApplicationSettingsActivity
-import com.xnova.digicerto.ui.settings.collect.CollectSettingsActivity
-import com.xnova.digicerto.ui.settings.file.FileSettingsActivity
-import com.xnova.digicerto.ui.settings.ftp.FTPSettingsActivity
-import com.xnova.digicerto.ui.settings.printer.PrinterSettingsActivity
-import com.xnova.digicerto.ui.settings.travel.TravelSettingsActivity
-import com.xnova.digicerto.ui.settings.ws.WSSettingsActivity
+import com.xnova.digicerto.ui.settings.application.SettingsApplicationActivity
+import com.xnova.digicerto.ui.settings.collect.SettingsCollectActivity
+import com.xnova.digicerto.ui.settings.file.SettingsFileActivity
+import com.xnova.digicerto.ui.settings.ftp.SettingsFTPActivity
+import com.xnova.digicerto.ui.settings.printer.SettingsPrinterActivity
+import com.xnova.digicerto.ui.settings.travel.SettingsTravelActivity
+import com.xnova.digicerto.ui.settings.ws.SettingsWSActivity
 
 class SettingsFragment : BaseFragment() {
 
@@ -47,7 +47,7 @@ class SettingsFragment : BaseFragment() {
         listeners()
         observers()
         adapters()
-        //login()
+        login()
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -85,27 +85,15 @@ class SettingsFragment : BaseFragment() {
         mMenuSettingsAdapter.setListener(object : MenuSettingsListener {
             override fun onClick(menu: MenuSettings) {
                 when (menu.id) {
-                    SettingsConstants.MENU.TRAVEL_ID -> startActivity(
-                        Intent(context, TravelSettingsActivity::class.java)
+                    SettingsConstants.MENU.TRAVEL_ID -> openActivity(SettingsTravelActivity::class.java)
+                    SettingsConstants.MENU.APPLICATION_ID -> openActivity(
+                        SettingsApplicationActivity::class.java
                     )
-                    SettingsConstants.MENU.APPLICATION_ID -> startActivity(
-                        Intent(context, ApplicationSettingsActivity::class.java)
-                    )
-                    SettingsConstants.MENU.COLLECT_ID -> startActivity(
-                        Intent(context, CollectSettingsActivity::class.java)
-                    )
-                    SettingsConstants.MENU.FTP_ID -> startActivity(
-                        Intent(context, FTPSettingsActivity::class.java)
-                    )
-                    SettingsConstants.MENU.WS_ID -> startActivity(
-                        Intent(context, WSSettingsActivity::class.java)
-                    )
-                    SettingsConstants.MENU.FILE_ID -> startActivity(
-                        Intent(context, FileSettingsActivity::class.java)
-                    )
-                    SettingsConstants.MENU.PRINTER_ID -> startActivity(
-                        Intent(context, PrinterSettingsActivity::class.java)
-                    )
+                    SettingsConstants.MENU.COLLECT_ID -> openActivity(SettingsCollectActivity::class.java)
+                    SettingsConstants.MENU.FTP_ID -> openActivity(SettingsFTPActivity::class.java)
+                    SettingsConstants.MENU.WS_ID -> openActivity(SettingsWSActivity::class.java)
+                    SettingsConstants.MENU.FILE_ID -> openActivity(SettingsFileActivity::class.java)
+                    SettingsConstants.MENU.PRINTER_ID -> openActivity(SettingsPrinterActivity::class.java)
                 }
             }
         })
@@ -127,20 +115,21 @@ class SettingsFragment : BaseFragment() {
 
     private fun showChooseTypeOperationAlert() {
         if (mViewModel.settings.necessaryChooseTypeOperation) {
-            alertFactory.getInstance(R.string.text_necessary_action,
-                R.string.msg_necessary_choosen_operation_type,
-                textIdPositive = R.string.text_web_service,
-                actionPositive = { dialog, _ ->
+            AlertFactory(requireContext())
+                .setCancelable(false)
+                .setTitle(R.string.text_necessary_action)
+                .setMessage(R.string.msg_necessary_choosen_operation_type)
+                .setPositiveButton(R.string.text_web_service) { dialog, _ ->
                     dialog.dismiss()
                     mViewModel.setOperationType(OperationType.WebService)
                     mViewModel.save()
-                },
-                textIdNegative = R.string.text_FTP,
-                actionNegative = { dialog, _ ->
+                }
+                .setNegativeButton(R.string.text_FTP) { dialog, _ ->
                     dialog.dismiss()
                     mViewModel.setOperationType(OperationType.FTP)
                     mViewModel.save()
-                }).show()
+                }
+                .show()
         }
     }
 

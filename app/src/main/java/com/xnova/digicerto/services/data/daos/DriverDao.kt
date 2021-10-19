@@ -8,6 +8,7 @@ import com.xnova.digicerto.models.entities.Driver
 
 @Dao
 interface DriverDao {
+
     @Insert
     fun add(driver: Driver)
 
@@ -19,4 +20,10 @@ interface DriverDao {
 
     @Query("update Driver set Active = 0")
     fun inactiveAll()
+
+    @Query("select count(Code) from Driver where Active = 1")
+    fun getTotalActives(): Int
+
+    @Query("select * from Driver where Active = 1")
+    fun getAllActive(): List<Driver>
 }

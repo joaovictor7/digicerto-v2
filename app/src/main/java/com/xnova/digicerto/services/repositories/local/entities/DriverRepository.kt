@@ -14,11 +14,19 @@ class DriverRepository(context: Context) {
             mDriverDao.add(driver) else mDriverDao.update(driver)
     }
 
-    fun get(id: Int): Driver? {
-        return mDriverDao.get(id)
+    fun get(code: Int): Driver? {
+        return mDriverDao.get(code)
+    }
+
+    fun getAllActive(): List<Driver> {
+        return mDriverDao.getAllActive()
     }
 
     fun inactiveAll() {
         mDriverDao.inactiveAll()
+    }
+
+    fun getTotalActives(): Int {
+        return mDriverDao.getTotalActives()
     }
 }

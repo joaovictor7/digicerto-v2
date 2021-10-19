@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2adddd65cfb14ea3377c62b5b9d914d8",
+    "identityHash": "e4ef18c49896a38cb9389c9d73666dd2",
     "entities": [
       {
         "tableName": "Driver",
@@ -76,7 +76,7 @@
       },
       {
         "tableName": "Producer",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `FarmCode` INTEGER NOT NULL, `Active` INTEGER NOT NULL, `Name` TEXT, `FarmName` TEXT, `AvgVolume` REAL, `TankType` TEXT NOT NULL, `TankCode` INTEGER, `Note` TEXT, PRIMARY KEY(`Code`, `FarmCode`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Code` INTEGER NOT NULL, `FarmCode` INTEGER NOT NULL, `Active` INTEGER NOT NULL, `Name` TEXT NOT NULL, `FarmName` TEXT, `AvgVolume` REAL, `TankType` TEXT NOT NULL, `TankCode` INTEGER, `Note` TEXT, PRIMARY KEY(`Code`, `FarmCode`))",
         "fields": [
           {
             "fieldPath": "code",
@@ -100,7 +100,7 @@
             "fieldPath": "name",
             "columnName": "Name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "farmName",
@@ -570,7 +570,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2adddd65cfb14ea3377c62b5b9d914d8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e4ef18c49896a38cb9389c9d73666dd2')"
     ]
   }
 }

@@ -16,6 +16,7 @@ class ProducerBuilder(mContext: Context) : Builder(mContext, REGISTER_TYPE) {
         return if (
             line.count() >= SyncConstants.FTP.KEYS.PRODUCER.MINIMUM_DATA &&
             NumberUtil.isInt(line[SyncConstants.FTP.KEYS.PRODUCER.CODE]) &&
+            line[SyncConstants.FTP.KEYS.PRODUCER.NAME].isNotBlank() &&
             NumberUtil.isBlankOrInt(line[SyncConstants.FTP.KEYS.PRODUCER.FARM_CODE]) &&
             NumberUtil.isBlankOrDouble(line[SyncConstants.FTP.KEYS.PRODUCER.AVG_VOLUME]) &&
             line[SyncConstants.FTP.KEYS.PRODUCER.TANK_TYPE].isNotBlank() &&
@@ -35,7 +36,7 @@ class ProducerBuilder(mContext: Context) : Builder(mContext, REGISTER_TYPE) {
 
         return Producer(
             code = line[SyncConstants.FTP.KEYS.PRODUCER.CODE].toInt(),
-            farmCode = if (farmCode > 0) farmCode else 1,
+            farmCode = farmCode,
             name = line[SyncConstants.FTP.KEYS.PRODUCER.NAME].trim().uppercase(),
             farmName = line[SyncConstants.FTP.KEYS.PRODUCER.FARM_NAME].trim().uppercase()
                 .ifBlank { null },

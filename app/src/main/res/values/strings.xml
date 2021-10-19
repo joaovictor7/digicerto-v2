@@ -10,19 +10,20 @@
     <string name="menu_home">Pagína Ínicial</string>
     <string name="menu_settings">Configurações</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_registers">Cadastros</string>
 
     <string name="text_compartments">Compartimentos</string>
     <string name="text_code">Código</string>
-    <string name="text_tank_code">Código Tanque</string>
-    <string name="text_tank_type">Tipo Tanque</string>
-    <string name="text_avg_volume">Volume Médio</string>
+    <string name="text_tank_code">Código tanque</string>
+    <string name="text_tank_type">Tipo tanque</string>
+    <string name="text_avg_volume">Volume médio</string>
+    <string name="text_avg_volume_colon">Volume médio: %1s</string>
     <string name="text_producer_code">Código produtor</string>
-    <string name="text_farm_code">Código Fazenda</string>
+    <string name="text_farm_code">Código fazenda</string>
     <string name="text_sequence">Sequência</string>
     <string name="text_plate">Placa</string>
     <string name="text_name">Nome</string>
-    <string name="text_occurrence_type">Tipo Ocorrência</string>
-    <string name="text_occurrence_description">Descrição Ocorrência</string>
+    <string name="text_occurrence_type_colon">Tipo de ocorrência: %1s</string>
     <string name="text_login">Login</string>
     <string name="text_user">Usuário</string>
     <string name="text_password">Senha</string>
@@ -83,7 +84,6 @@
     <string name="text_user_printer">Utilizar impressora</string>
     <string name="text_bluetooth_printer">Impressora bluetooth</string>
     <string name="text_grant_permission">Conceder permissões</string>
-    <string name="text_printer_used">Impressora utilizada</string>
     <string name="text_print_cancelled_collections">Imprimir coletas canceladas</string>
     <string name="text_printer_layout">Layout de impressão</string>
     <string name="text_collective_tank_collection">Coleta de tanque coletivo</string>
@@ -100,6 +100,21 @@
     <string name="text_ever">Sempre</string>
     <string name="text_optional">Opcional</string>
     <string name="text_disabled_bluetooth">Bluetooth desativado</string>
+    <string name="text_drivers">Motoristas</string>
+    <string name="text_occurrences">Ocorrências</string>
+    <string name="text_producers">Produtores</string>
+    <string name="text_routes">Rotas</string>
+    <string name="text_vehicles">Veículos</string>
+    <string name="text_sync">Sincronizar</string>
+    <string name="text_last_sync_colon">Última sincronização:</string>
+    <string name="text_producer_type_colon">Tipo de produtor: %1s</string>
+    <string name="text_tank_code_colon">Código do tanque: %1s</string>
+    <string name="text_route_producers_colon">Produtores na rota: %1d</string>
+    <string name="text_code_name_producer">Código ou nome do produtor</string>
+    <string name="text_individual">Individual</string>
+    <string name="text_associate">Associado</string>
+    <string name="text_collective">Coletivo</string>
+    <string name="text_code_name_driver">Código ou nome do motorista</string>
 
 
     <string name="msg_update_registers">Atualizando cadastros</string>
@@ -120,8 +135,15 @@
     <string name="msg_connect_ftp_failed">Falha de conexão com o FTP</string>
     <string name="msg_autentication_ftp_failed">Falha na autenticação do FTP</string>
     <string name="msg_description_file">Configurações relacionadas aos arquivos de exportação de coletas gerados pelo aplicativo.</string>
-    <string name="msg_grant_permission">Precisamos das seguintes permissões em seu smartphone para que o aplicativo utilize algumas funções como acessar a câmera, bluetooth, etc.</string>
-    <string name="msg_network_connect">Conecte o celular a internet primeiro.</string>
+    <string name="msg_grant_permission">Precisamos das seguintes permissões para que o aplicativo funcione como o esperado.</string>
+    <string name="msg_network_connect">Conecte o smartphone a internet primeiro.</string>
+    <string name="msg_not_sync">Não sincronizado</string>
+    <string name="msg_operation_type_not_configured">Você ainda não configurou o tipo de operação do aplicativo.\nVá ao menu Configurações > Aplicativo.</string>
+    <string name="msg_sync_failure">Não foi possível atualizar os cadastros.</string>
+    <string name="msg_sync_success">Os cadastros foram atualizados.</string>
+    <string name="msg_register_ftp">Cadastre os dados de acesso ao FTP antes de sincronizar.</string>
+    <string name="msg_no_registration_registers">Não há cadastros de %1s</string>
+
 
     <!-- Settings -->
     <string name="msg_printer_not_working">Não foi possível realizar o teste de impressão.</string>
@@ -136,16 +158,21 @@
     <string name="msg_printer_testing">Testando a impressora</string>
     <string name="msg_test_ftp">Verificar se a conexão com o FTP está funcionando?</string>
     <string name="msg_test_ws">Verificar se a conexão com o Web Service está funcionando?</string>
-    <string name="msg_active_bluetooth">Ative o bluetooth do celular para utilizar a impressora.</string>
+    <string name="msg_active_bluetooth">Ative o bluetooth do smartphone para utilizar a impressora.</string>
+    <string name="msg_click_view_register">Clique para visualizar os cadastros.</string>
+
 
     <!-- Printer -->
     <string name="text_printer_working">IMPRESSORA OK</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text_sync">Sincronizar</string>
-    <string name="text_last_sync">Última sincronização:</string>
-    <string name="menu_registers">Cadastros</string>
-    <string name="msg_not_sync">não sincronizado</string>
-    <string name="msg_operation_type_not_configured">Você ainda não configurou o tipo de operação do aplicativo. (FTP ou Web Service)</string>
+
+
+    <!-- Organize -->
+    <string name="text_code_description_occurrence">Código ou descrição da ocorrência</string>
+    <string name="text_not_collect">Não coleta</string>
+    <string name="text_code_plate_vehicle">Código ou placa do veículo</string>
+    <string name="text_compartment">Compartimento</string>
+    <string name="text_capacity">Capacidade (L)</string>
+    <string name="text_code_name_route">Código ou nome da rota</string>
+    <string name="msg_select_printer">Selecione uma impressora</string>
 
 </resources>

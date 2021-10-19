@@ -1,11 +1,9 @@
 package com.xnova.digicerto.services.data.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.xnova.digicerto.models.entities.Vehicle
 import com.xnova.digicerto.models.entities.VehicleCompartment
+import com.xnova.digicerto.models.entities.relations.VehicleWithCompartments
 
 @Dao
 interface VehicleDao {
@@ -30,4 +28,11 @@ interface VehicleDao {
 
     @Insert
     fun addCompartment(vehicleCompartment: VehicleCompartment)
+
+    @Query("select count(Code) from Vehicle where Active = 1")
+    fun getTotalActives(): Int
+
+    @Transaction
+    @Query("select * from Vehicle where Active = 1")
+    fun getAllActive(): List<VehicleWithCompartments>
 }

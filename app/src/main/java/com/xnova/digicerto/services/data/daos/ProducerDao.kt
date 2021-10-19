@@ -8,8 +8,8 @@ import com.xnova.digicerto.models.entities.Producer
 
 @Dao
 interface ProducerDao {
-    @Query("select * from Producer where Code = :code")
-    fun get(code: Int): Producer?
+    @Query("select * from Producer where Code = :code and FarmCode = :farmCode")
+    fun get(code: Int, farmCode: Int): Producer?
 
     @Update
     fun update(producer: Producer)
@@ -19,4 +19,10 @@ interface ProducerDao {
 
     @Query("update Producer set Active = 0")
     fun inactiveAll()
+
+    @Query("select count(Code) from Producer where Active = 1")
+    fun getTotalActive(): Int
+
+    @Query("select * from Producer where Active = 1")
+    fun getAllActive(): List<Producer>
 }

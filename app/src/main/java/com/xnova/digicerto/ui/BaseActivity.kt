@@ -2,51 +2,48 @@ package com.xnova.digicerto.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.xnova.digicerto.services.enums.AlertType
 import com.xnova.digicerto.services.factories.AlertFactory
 import com.xnova.digicerto.services.factories.ProgressBarFactory
+import com.xnova.digicerto.services.factories.inputs.OnClickFactory
 
-open class BaseActivity(title: Int? = null) : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
-    protected lateinit var alertFactory: AlertFactory
     protected lateinit var viewRoot: View
 
-    private val mTitle = title
     private var mProgressBar: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actionBar()
 
-        alertFactory = AlertFactory(this)
+        actionBar()
     }
 
     fun showAlert(alertType: AlertType, titleId: Int, messageId: Int) {
-        alertFactory.getInstance(alertType, titleId, messageId,
-            neutralButton = { dialog, _ ->
-                dialog.dismiss()
-            }).show()
+        AlertFactory(this)
+            .setType(alertType)
+            .setTitle(titleId)
+            .setMessage(messageId)
+            .setNeutralButton()
+            .show()
     }
 
-    fun showSnackBar(messageId: Int) {
-        Snackbar.make(viewRoot, messageId, Snackbar.LENGTH_LONG).show()
+    fun showSnackBar(message: String) {
+        Snackbar.make(viewRoot, message, Snackbar.LENGTH_LONG).show()
     }
 
     fun showMandatoryMsg(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    fun showHelp(textView: TextView, messageId: Int) {
-        textView.text = getString(messageId)
-        textView.visibility = View.VISIBLE
-    }
-
-    fun hideHelp(textView: TextView) {
-        textView.visibility = View.GONE
+        view.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
     fun showProgressBar(messageId: Int) {
@@ -58,10 +55,26 @@ open class BaseActivity(title: Int? = null) : AppCompatActivity() {
         mProgressBar?.dismiss()
     }
 
-    private fun actionBar() {
-        if (mTitle != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.title = getString(mTitle)
+    fun setCloseKeyboardOnClick() {
+        var viewGroup = viewRoot as ViewGroup
+        if (viewGroup is ScrollView) {
+            viewGroup = viewGroup.getChildAt(0) as ViewGroup
+            if (viewGroup !is LinearLayoutCompat && viewGroup !is ConstraintLayout) {
+                return
+            }
         }
+
+        val onClickFactory = OnClickFactory(this)
+        viewGroup.setOnClickListener(onClickFactory.closeKeyboard(viewGroup))
+        for (i in 0 until viewGroup.childCount) {
+            val v = viewGroup.getChildAt(i)
+            if (v is MaterialCardView) {
+                v.setOnClickListener(onClickFactory.closeKeyboard(v))
+            }
+        }
+    }
+
+    private fun actionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

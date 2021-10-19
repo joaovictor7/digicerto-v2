@@ -23,7 +23,7 @@ class RouteProducerBuilder(context: Context) : Builder(context, RouteBuilder.REG
         return RouteProducer(
             routeCode = line[SyncConstants.FTP.KEYS.ROUTE.CODE].toInt(),
             producerCode = line[SyncConstants.FTP.KEYS.ROUTE.PRODUCER_CODE].toInt(),
-            producerFarmCode = if (producerFarmCode > 0) producerFarmCode else 1,
+            producerFarmCode = producerFarmCode,
             sequence = sequence
         )
     }
